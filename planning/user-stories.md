@@ -37,4 +37,33 @@ Template: Given **\_\_\_\_\_\_**, when **\_\_\_\_\_\_**, then **\_\_\_\_\_\_**.
 - favorite maps
 - maps I’ve contributed to
 
+---
+# Routes
 
+Users
+- ~~B- GET users/~~  (Not needed for MVD)
+- R- GET users/:id
+- ~~E- POST users/:id~~ (Not needed for MVD)
+- A- POST users/
+- ~~D- POST users/:id/delete~~ (Not needed for MVD)
+
+Maps
+- B- GET maps/
+- R- GET maps/:id
+- E- POST maps/:id
+- A- POST maps/
+- D- POST maps/:id/delete
+
+Map Points
+- B- GET map_point/
+- ~~R- GET map_point/:id~~ (Not needed for MVD)
+- E- POST map_point/:id
+- A- POST map_point/
+- D- POST map_point/:id/delete
+
+Favourite Maps
+- B- GET favourite_maps/
+- R- GET favourite_maps/:id
+- ~~E- POST favourite_maps/:id~~ (Not needed for MVD)
+- A- POST favourite_maps/
+- D- POST favourite_maps/:id/delete
