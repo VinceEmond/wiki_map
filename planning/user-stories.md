@@ -55,15 +55,18 @@ Maps
 - D- POST maps/:id/delete
 
 Map Points
-- B- GET map_point/
-- ~~R- GET map_point/:id~~ (Not needed for MVD)
-- E- POST map_point/:id
-- A- POST map_point/
-- D- POST map_point/:id/delete
+- B- GET map_points/
+- R- GET map_points/:id
+- E- POST map_points/:id
+- A- POST map_points/
+- D- POST map_points/:id/delete
 
 Favourite Maps
-- B- GET favourite_maps/
-- R- GET favourite_maps/:id
+- B- GET favourite_maps/ 
+- ~~R- GET favourite_maps/:id~~ (This can be acheived with GET maps/:id)
 - ~~E- POST favourite_maps/:id~~ (Not needed for MVD)
 - A- POST favourite_maps/
 - D- POST favourite_maps/:id/delete
+
+Maps Contributed To
+- B- Browse Maps Contributed to?
