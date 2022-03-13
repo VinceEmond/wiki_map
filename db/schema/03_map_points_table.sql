@@ -1,0 +1,13 @@
+DROP TABLE IF EXISTS map_points CASCADE;
+
+CREATE TABLE map_points(
+  id SERIAL PRIMARY KEY NOT NULL,
+  map_id INTEGER REFERENCES maps(id) ON DELETE CASCADE,
+  owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  name VARCHAR(255) NOT NULL,
+  coord_x DECIMAL NOT NULL,
+  coord_y DECIMAL NOT NULL,
+  zoom DECIMAL NOT NULL,
+  description TEXT,
+  image VARCHAR(255)
+);
