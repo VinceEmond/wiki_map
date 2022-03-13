@@ -17,11 +17,21 @@
   <h1>Wiki Maps</h1>
   <header class="user_status">UserName/logged in here...</header>
   <section>
+    <div>
+      <form method="POST" action="/maps">
+        <input id="map_name" type="text"></input>
+        <input id="map_desc" type="text"></input>
+        <button type="submit">Submit</button>
+        </form>
+    </div>
     <div class="maps_list"> Maps here...</div>
     <div class="map_points_list">Maps Points here...</div>
     <div class="favourites_list">Favourite Maps here...</div>
     <div class="contributed_maps_list">Maps I Contributed to here...</div>
+
   </section>
+  <!-- App JS -->
+  <!--<script type="text/javascript" src="/scripts/app.js"></script>
 </body>
 
 </html>
