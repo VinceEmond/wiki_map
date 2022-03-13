@@ -139,20 +139,20 @@
     FROM users
     ORDER BY users.name;
 
--- All maps ordered by owner id
+-- All maps ordered by user name
     SELECT users.name AS user_name, maps.name AS map_name
     FROM maps
     JOIN users ON users.id = maps.owner_id
     ORDER BY users.name;
 
--- All map_points ordered by owner id
+-- All map_points ordered by user name
     SELECT users.name AS user_name, maps.name AS map_name, map_points.name AS point_name
     FROM maps
     JOIN map_points ON map_points.map_id = maps.id
     JOIN users ON users.id = map_points.owner_id
     ORDER BY users.name, maps.name;
 
--- All favourites order by owner id
+-- All favourites order by user name
     SELECT users.name AS user_name, maps.name AS fav_map
     FROM favourite_maps
     JOIN users ON users.id = favourite_maps.user_id
