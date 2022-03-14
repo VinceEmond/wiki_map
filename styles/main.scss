@@ -51,6 +51,10 @@ nav button {
   margin-left: 10px;
 }
 
+nav button:hover {
+  filter: drop-shadow(3px 3px 1px #3f3f3f);
+}
+
 #side-bar {
   z-index: 2;
   min-height: 100vh;
