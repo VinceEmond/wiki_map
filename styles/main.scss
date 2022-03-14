@@ -55,7 +55,7 @@ nav button {
   z-index: 2;
   min-height: 100vh;
   width: 20%;
-  background-color: antiquewhite;
+  background-color: white;
   border: 1px solid red;
   position: absolute;
   left: 0;
@@ -65,9 +65,41 @@ nav button {
   flex-direction: column;
 }
 
-.folder {
-  height: 200px;
-  width: 90%;
-  background-color: grey;
-  border-radius: 5px;
+.folder h2 {
+  text-align: left;
+  background-color: rgb(182, 182, 182);
+  margin: 0;
+  padding: 10px 15px;
+  position: fixed;
+  width: 17.9%;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
+
+.folder::-webkit-scrollbar {
+  display: none;
+}
+
+.folder {
+  max-height: 500px; //The max height a folder can be
+  width: 90%;
+  background-color: rgb(211, 211, 211);
+  border-radius: 5px;
+  overflow: auto;
+  position: relative;
+}
+
+.folder h2 i:first-of-type {
+  margin-right: 10px;
+}
+
+.folder h2 i:last-of-type {
+  float: right;
+}
+
+.maps_list {
+  margin-top: 60px;
+  padding: 10px 10px;
+}
+
+
