@@ -42,6 +42,12 @@ function initMap() {
   $('#contrib-collapse').click(() => {
     $('.contributed_maps_list').slideToggle();
   });
+  $('#new-map-collapse').click(() => {
+    $('.new_map_list').slideToggle();
+  });
+  $('#new-pin-collapse').click(() => {
+    $('.new_pin_list').slideToggle();
+  });
 
   // Make nav buttons collapse/expand their associated folders
   $('#maps-button').click(() => {
@@ -55,5 +61,11 @@ function initMap() {
   });
   $('#contrib-button').click(() => {
     $('.contributed_maps_list').slideToggle();
+  });
+  $('#new-map-button').click(() => {
+    $('.new_map_list').slideToggle();
+  });
+  $('#new-pin-button').click(() => {
+    $('.new_pin_list').slideToggle();
   });
 }

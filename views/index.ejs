@@ -33,11 +33,14 @@
     <button type="button" id="pins-button"><i class="fa-solid fa-location-dot"></i> Pins</button>
     <button type="button" id="fav-button"><i class="fa-solid fa-star"></i> Favorites</button>
     <button type="button" id="contrib-button"><i class="fa-solid fa-handshake-angle"></i> Contributions</button>
+    <button type="button" id="new-map-button"><i class="fa-solid fa-circle-plus"></i> New Map</button>
+    <button type="button" id="new-pin-button"><i class="fa-solid fa-circle-plus"></i> New Pin</button>
   </nav>
 
   <section id="side-bar">
     <!-- not working - <img src="../public/images/pin_logo.png" alt="Wiki Maps Logo"> -->
     <div>
+      <img src="../images/map_logo.png" alt="Wiki Maps Logo">
       <h1>Wiki Maps</h1>
     </div>
 
@@ -67,6 +70,36 @@
         <h2><i class="fa-solid fa-handshake-angle"></i>Contributions<i class="fa-solid fa-angle-down"></i></h2>
       </div>
       <div class="contributed_maps_list">Maps I Contributed to here...</div>
+    </div>
+
+    <div class="folder push-top">
+      <div id="new-map-collapse">
+        <h2><i class="fa-solid fa-circle-plus"></i>New Map<i class="fa-solid fa-angle-down"></i></h2>
+      </div>
+      <div class="new_map_list">
+        <form action="" method="post">
+          <label for="mtitle">Title:</label>
+          <input type="text" id="mtitle" name="mtitle"><br><br>
+          <label for="mdesc">Description:</label>
+          <input type="text" id="mdesc" name="mdesc"><br><br>
+          <input type="submit" value="Submit" id="msubmit">
+        </form>
+      </div>
+    </div>
+
+    <div class="folder push-top">
+      <div id="new-pin-collapse">
+        <h2><i class="fa-solid fa-circle-plus"></i>New Pin<i class="fa-solid fa-angle-down"></i></h2>
+      </div>
+      <div class="new_pin_list">
+        <form action="" method="post">
+          <label for="ptitle">Title:</label>
+          <input type="text" id="ptitle" name="ptitle"><br><br>
+          <label for="pdesc">Description:</label>
+          <input type="text" id="pdesc" name="pdesc"><br><br>
+          <input type="submit" value="Submit" id="msubmit">
+        </form>
+      </div>
     </div>
   </section>
 

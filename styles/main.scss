@@ -60,6 +60,12 @@ nav button:hover {
   flex-direction: column;
 }
 
+#side-bar img {
+  width: 80px;
+  height: auto;
+  margin-top: 25px;
+}
+
 .folder h2 {
   text-align: left;
   background-color: rgb(182, 182, 182);
@@ -97,10 +103,18 @@ nav button:hover {
   float: right;
 }
 
-.maps_list, .map_points_list, .favourites_list, .contributed_maps_list {
+.maps_list, .map_points_list, .favourites_list, .contributed_maps_list, .new_map_list, .new_pin_list {
   margin-top: 40px;
   padding: 10px 10px;
   display: none;
+}
+
+.new_map_list, .new_pin_list {
+  text-align: right;
+}
+
+#msubmit {
+  text-align: c;
 }
 
 .push-top {
