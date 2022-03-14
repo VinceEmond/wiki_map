@@ -4,6 +4,15 @@
 <head>
   <title>Home Page</title>
 
+  <!-- Map API links -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+  <!--Make sure you put this AFTER Leaflet's CSS -->
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin="">
+  </script>
+  <script type="text/javascript" src="/scripts/map.js"></script>
+
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
@@ -13,7 +22,10 @@
   <script type="text/javascript" src="/scripts/app.js"></script>
 </head>
 
-<body>
+<!-- Calling the map function here, may want to swap to jquery later ($(document).ready) -->
+<body onload='initMap()'>
+
+  <div id="map"></div>
 
   <nav>
     <button type="button">Maps</button>
