@@ -58,7 +58,7 @@ $(document).ready(function() {
 
   $(function() {
     let  request = null;
-    const $form = $('form');
+    const $form = $('.new_map_list form');
     //****************TODO****************************/
     //*****this maps submit/POST needs work **********/
     //************************************************/

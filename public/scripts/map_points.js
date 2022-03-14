@@ -15,8 +15,10 @@ $(document).ready(function() {
     const {name, description} = mapPointData;
 
     const $mapPoint = $(`
-      <p class="name">Map Point Title: ${escape(name)}</p>
-      <p>${escape(description)}</p>
+      <div class="map_points_list_wrapper">
+        <p class="name">${escape(name)}</p>
+        <p>${escape(description)}</p>
+      </d>
     `);
     return $mapPoint;
   };
@@ -26,16 +28,17 @@ $(document).ready(function() {
     const mapPointsArr = dataObj.mapPoints;
     for (let mapPoint of mapPointsArr) {
       const $mapPoint = createMapPointElement(mapPoint);
-      $('.map_points_list').append($mapPoint);
+      $('.map_points_list').prepend($mapPoint);
     }
     return;
   };
 
   //this request the data from /maps GET route and renders all map items
   const loadMapPoints = function() {
-    console.log('Made it to top of loadMapPoints');
+    // console.log('Made it to top of loadMapPoints');
     $.ajax('/map_points', { method: 'GET' })
       .then((mapPointsObj) => {
+        $(".map_points_list_wrapper").remove();
         renderMapPointsList(mapPointsObj);
       })
       .catch(err => {
@@ -45,13 +48,53 @@ $(document).ready(function() {
       });
   };
 
-  const $mapPointsList = $('.map_points_list');
+  const $newMapPoint = $('.new_pin_list form');
 
-  $mapPointsList.on('click', function() {
-    console.log("Attemp");
+
+  $newMapPoint.submit(function(event) {
+    event.preventDefault();
+
+    const dataFromInputs = {
+      newPinTitle: $("#ptitle").val(),
+      newPinDesc: $("#pdesc").val()
+    };
+
+    $.ajax({ url: "/map_points", method: "POST", data: dataFromInputs})
+      .then((response, status) =>  {
+        console.log('Succesfully added new map pin!');
+        loadMapPoints();
+      })
+      .catch((err) => {
+        console.log("Error :", console.err.message);
+      });
+
+
+
+    // // Callback handler that will be called on failure
+    // request.fail(function(jqXHR, status, error) {
+    //   //if there was a failure
+    //   console.error("The form POST failed. Error: " + status, error);
+    // });
+
+
+    // $.ajax('/map_points', { method: 'POST' })
+    // .then((mapPointsObj) => {
+    //   console.log('Created new map point!');
+    //   renderMapPointsList(mapPointsObj);
+    // })
+    // .catch(err => {
+    //   console.log('Creat New Map Points Error', err);
+
+    // });
+
   });
+
+  // $form.submit(function(event) {
+  //   event.preventDefault();
+  // $mapPointsList.on('click', function() {
+  //   console.log("Cli");
+  // });
 
   loadMapPoints();
 
-  console.log('map_points.js file loaded!');
 });
