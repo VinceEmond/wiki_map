@@ -25,6 +25,7 @@ $(document).ready(function() {
     }
     return;
   };
+
   //this request the data from /maps GET route and renders all map items
   const loadMaps = function() {
     $.ajax('/maps', { method: 'GET' })
@@ -61,7 +62,7 @@ $(document).ready(function() {
     //****************TODO****************************/
     //*****this maps submit/POST needs work **********/
     //************************************************/
-    $form.submit(function (event) {
+    $form.submit(function(event) {
       event.preventDefault();
       const mapName = $("#map_name").val();
       const mapDesc = $("#map_desc").val();
@@ -70,7 +71,7 @@ $(document).ready(function() {
       let queryStr = $form.find("button, input, input");
       queryStr = { map_name: mapName, map_desc: mapDesc };
       console.log("queryStr:", queryStr);
-      console.log("thisSerialize:",$( this ).serialize());
+      console.log("thisSerialize:",$(this).serialize());
       console.log("formSerialize:",$form.serialize());
       //****************TODO****************************/
       //**Add data validation here**/
@@ -79,7 +80,7 @@ $(document).ready(function() {
       //** "/maps" POST route to add a map needs to be created in routes/maps.js **/
       request = $.ajax({ url: "/maps", method: "POST", data: queryStr});
       // Callback handler that will be called on success
-      request.done(function (response, status, jqXHR){
+      request.done(function(response, status, jqXHR) {
         console.log("Map POST successful.");
         //if successful clear out the text values.
         $("#map_name").val("");
@@ -87,13 +88,13 @@ $(document).ready(function() {
         loadMaps();
       });
       // Callback handler that will be called on failure
-      request.fail(function (jqXHR, status, error){
+      request.fail(function(jqXHR, status, error) {
         //if there was a failure
         console.error("The form POST failed. Error: " + status, error);
       });
       // Callback handler that will be called regardless
       // if the request failed or succeeded
-      request.always(function () {
+      request.always(function() {
         //$inputs.prop("disabled", false);
       });
     });
