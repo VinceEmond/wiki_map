@@ -27,8 +27,54 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+  // router.post("/", (req, res) => {
+  //   console.log("req", req.body);
+  //   db.query(`
+  //   INSERT INTO maps (owner_id, name, description, coord_x, coord_y, zoom) VALUES
+  //   1,
+  //   'NewMapName',
+  //   'This is the description of a new map name',
+  //   45.42135855590803,
+  //   -75.69668268181056,
+  //   13;`
+  //   )
+  //     .then(data => {
+  //       const maps = data.rows;
+  //       res.json({ maps });
+  //     })
+  //     .catch(err => {
+  //       res
+  //         .status(500)
+  //         .json({ error: err.message });
+  //     });
+  // });
   return router;
 };
 
+// POST maps/   ---
+// module.exports = (db) => {
+//   router.post("/", (req, res) => {
+//     console.log("req", req);
+//     db.query(`
+//     INSERT INTO maps (owner_id, name, description, coord_x, coord_y, zoom) VALUES
+//     1,
+//     'NewMapName',
+//     'This is the description of a new map name',
+//     45.42135855590803,
+//     -75.69668268181056,
+//     13;`
+//     )
+//       .then(data => {
+//         const maps = data.rows;
+//         res.json({ maps });
+//       })
+//       .catch(err => {
+//         res
+//           .status(500)
+//           .json({ error: err.message });
+//       });
+//   });
+//   return router;
+// };
 
 
