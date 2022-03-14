@@ -4,6 +4,16 @@
 <head>
   <title>Home Page</title>
 
+  <!-- Map API links -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+  <!--Make sure you put this AFTER Leaflet's CSS -->
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin="">
+  </script>
+  <script type="text/javascript" src="/scripts/map.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
@@ -14,8 +24,88 @@
   <script type="text/javascript" src="/scripts/map_points.js"></script>
 </head>
 
-<body>
-  <h1>Wiki Maps</h1>
+<!-- Calling the map function here, may want to swap to jquery later ($(document).ready) -->
+<body onload='initMap()'>
+
+  <div id="map"></div>
+
+  <nav>
+    <button type="button" id="maps-button"><i class="fa-solid fa-earth-americas"></i> Maps</button>
+    <button type="button" id="pins-button"><i class="fa-solid fa-location-dot"></i> Pins</button>
+    <button type="button" id="fav-button"><i class="fa-solid fa-star"></i> Favorites</button>
+    <button type="button" id="contrib-button"><i class="fa-solid fa-handshake-angle"></i> Contributions</button>
+    <button type="button" id="new-map-button"><i class="fa-solid fa-circle-plus"></i> New Map</button>
+    <button type="button" id="new-pin-button"><i class="fa-solid fa-circle-plus"></i> New Pin</button>
+  </nav>
+
+  <section id="side-bar">
+    <!-- not working - <img src="../public/images/pin_logo.png" alt="Wiki Maps Logo"> -->
+    <div>
+      <img src="../images/map_logo.png" alt="Wiki Maps Logo">
+      <h1>Wiki Maps</h1>
+    </div>
+
+    <div class="folder">
+      <div id="maps-collapse">
+        <h2><i class="fa-solid fa-earth-americas"></i>Maps<i class="fa-solid fa-angle-down"></i></h2>
+      </div>
+      <div class="maps_list"> Maps here...</div>
+    </div>
+
+    <div class="folder push-top">
+      <div id="pins-collapse">
+        <h2><i class="fa-solid fa-location-dot"></i>Pins<i class="fa-solid fa-angle-down"></i></h2>
+      </div>
+      <div class="map_points_list">Maps Points here...</div>
+    </div>
+
+    <div class="folder push-top">
+      <div id="fav-collapse">
+        <h2><i class="fa-solid fa-star"></i>Favourites<i class="fa-solid fa-angle-down"></i></h2>
+      </div>
+      <div class="favourites_list">Favourite Maps here...</div>
+    </div>
+
+    <div class="folder push-top">
+      <div id="contrib-collapse">
+        <h2><i class="fa-solid fa-handshake-angle"></i>Contributions<i class="fa-solid fa-angle-down"></i></h2>
+      </div>
+      <div class="contributed_maps_list">Maps I Contributed to here...</div>
+    </div>
+
+    <div class="folder push-top">
+      <div id="new-map-collapse">
+        <h2><i class="fa-solid fa-circle-plus"></i>New Map<i class="fa-solid fa-angle-down"></i></h2>
+      </div>
+      <div class="new_map_list">
+        <form action="" method="post">
+          <label for="mtitle">Title:</label>
+          <input type="text" id="mtitle" name="mtitle"><br><br>
+          <label for="mdesc">Description:</label>
+          <input type="text" id="mdesc" name="mdesc"><br><br>
+          <input type="submit" value="Submit" id="msubmit">
+        </form>
+      </div>
+    </div>
+
+    <div class="folder push-top">
+      <div id="new-pin-collapse">
+        <h2><i class="fa-solid fa-circle-plus"></i>New Pin<i class="fa-solid fa-angle-down"></i></h2>
+      </div>
+      <div class="new_pin_list">
+        <form action="" method="post">
+          <label for="ptitle">Title:</label>
+          <input type="text" id="ptitle" name="ptitle"><br><br>
+          <label for="pdesc">Description:</label>
+          <input type="text" id="pdesc" name="pdesc"><br><br>
+          <input type="submit" value="Submit" id="msubmit">
+        </form>
+      </div>
+    </div>
+  </section>
+
+
+  <!--<h1>Wiki Maps</h1>
   <header class="user_status">UserName/logged in here...</header>
   <section>
     <div>
@@ -30,9 +120,9 @@
     <div class="favourites_list"><h2>Favourite Maps here...</h2></div>
     <div class="contributed_maps_list"><h2>Maps I Contributed to here...</h2></div>
 
-  </section>
+  </section>-->
   <!-- App JS -->
-  <!--<script type="text/javascript" src="/scripts/app.js"></script>
+  <!--<script type="text/javascript" src="/scripts/app.js"></script> -->
 </body>
 
 </html>

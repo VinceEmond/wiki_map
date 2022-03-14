@@ -1,18 +1,124 @@
 body {
   display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
-  flex-direction: column;
-
-  background: rgb(163, 208, 219);
-  background: linear-gradient(
-    227deg,
-    rgba(163, 208, 219, 1) 0%,
-    rgba(163, 176, 219, 1) 20%,
-    rgba(163, 173, 219, 1) 34%,
-    rgba(163, 219, 208, 1) 59%,
-    rgba(163, 208, 219, 1) 74%,
-    rgba(163, 208, 219, 1) 100%
-  );
 }
+
+#map {
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+nav {
+  z-index: 2;
+  height: 50px;
+  width: 80%;
+  position: absolute;
+  right: 0;
+  background-color: none;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+nav button {
+  background-color: white; /* Green */
+  border: none;
+  color: black;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 25px;
+  margin-left: 10px;
+}
+
+@keyframes buttonDown {
+  from {margin-top: 0px;}
+  to {margin-top: 6px;}
+}
+
+nav button:hover {
+  animation: buttonDown 0.2s forwards;
+  cursor: pointer;
+}
+
+#side-bar {
+  z-index: 2;
+  min-height: 100vh;
+  width: 20%;
+  background-color: white;
+  position: absolute;
+  left: 0;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+#side-bar img {
+  width: 80px;
+  height: auto;
+  margin-top: 25px;
+}
+
+.folder h2 {
+  text-align: left;
+  background-color: rgb(182, 182, 182);
+  margin: 0;
+  padding: 10px 15px;
+  position: fixed;
+  width: 17.9%;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  font-size: 18px;
+}
+
+.folder h2:hover {
+  cursor: pointer;
+}
+
+.folder::-webkit-scrollbar {
+  display: none;
+}
+
+.folder {
+  max-height: 500px; //The max height a folder can be
+  width: 90%;
+  background-color: rgb(211, 211, 211);
+  border-radius: 5px;
+  overflow: auto;
+  position: relative;
+}
+
+.folder h2 i:first-of-type {
+  margin-right: 10px;
+}
+
+.folder h2 i:last-of-type {
+  float: right;
+}
+
+.maps_list, .map_points_list, .favourites_list, .contributed_maps_list, .new_map_list, .new_pin_list {
+  margin-top: 40px;
+  padding: 10px 10px;
+  display: none;
+}
+
+.new_map_list, .new_pin_list {
+  text-align: right;
+}
+
+#msubmit {
+  text-align: c;
+}
+
+.push-top {
+  margin-top: 60px;
+}
+
+
