@@ -43,4 +43,10 @@ function initMap() {
     $('.contributed_maps_list').slideToggle();
   });
 
+  // Make nav buttons collapse/expand their associated folders
+  $(function(){
+    $('#maps-button').click(function() {
+        alert("Hello");
+    });
+});
 }

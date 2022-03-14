@@ -51,8 +51,13 @@ nav button {
   margin-left: 10px;
 }
 
+@keyframes buttonDown {
+  from {margin-top: 0px;}
+  to {margin-top: 6px;}
+}
+
 nav button:hover {
-  filter: drop-shadow(3px 3px 1px #3f3f3f);
+  animation: buttonDown 0.2s forwards;
 }
 
 #side-bar {
