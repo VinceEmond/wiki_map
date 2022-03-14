@@ -56,7 +56,6 @@ nav button {
   min-height: 100vh;
   width: 20%;
   background-color: white;
-  border: 1px solid red;
   position: absolute;
   left: 0;
   text-align: center;
@@ -74,6 +73,7 @@ nav button {
   width: 17.9%;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  font-size: 18px;
 }
 
 .folder::-webkit-scrollbar {
@@ -97,9 +97,14 @@ nav button {
   float: right;
 }
 
-.maps_list {
-  margin-top: 60px;
+.maps_list, .map_points_list, .favourites_list, .contributed_maps_list {
+  margin-top: 40px;
   padding: 10px 10px;
+  display: none;
+}
+
+.push-top {
+  margin-top: 60px;
 }
 
 

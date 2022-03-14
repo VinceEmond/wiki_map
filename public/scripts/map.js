@@ -29,4 +29,18 @@ function initMap() {
     return false; // To disable default popup.
   });
 
+  // Collapse folder sections on click
+  $('#maps-collapse').click(function() {
+    $('.maps_list').slideToggle();
+  });
+  $('#pins-collapse').click(function() {
+    $('.map_points_list').slideToggle();
+  });
+  $('#fav-collapse').click(function() {
+    $('.favourites_list').slideToggle();
+  });
+  $('#contrib-collapse').click(function() {
+    $('.contributed_maps_list').slideToggle();
+  });
+
 }
