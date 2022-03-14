@@ -29,12 +29,22 @@ function initMap() {
     return false; // To disable default popup.
   });
 
+  const hideFolders = function () {
+
+  };
+
   // Collapse folder sections on click
   $('#maps-collapse').click(() => {
     $('.maps_list').slideToggle();
+    $('.maps_list').toggleClass('hide');
+    $('.hide').slideUp();
+    $('.maps_list').toggleClass('hide');
   });
   $('#pins-collapse').click(() => {
     $('.map_points_list').slideToggle();
+    $('.map_points_list').toggleClass('hide');
+    $('.hide').slideUp();
+    $('.map_points_list').toggleClass('hide');
   });
   $('#fav-collapse').click(() => {
     $('.favourites_list').slideToggle();
