@@ -3,7 +3,7 @@
 
 $(document).ready(function() {
   //this escapes the content
-  const escape = function (str) {
+  const escape = function(str) {
     let div = document.createElement("div");
     div.appendChild(document.createTextNode(str));
     return div.innerHTML;
@@ -18,34 +18,34 @@ $(document).ready(function() {
     return $map;
   };
   //this appends map items to the maps_list element in index.ejs.
-  const renderMaps = function (arrMapData) {
+  const renderMaps = function(arrMapData) {
     for (let mapData of arrMapData.maps) {
       const $map = createMapElement(mapData);
       $('.maps_list').append($map);
     }
     return;
-  }
+  };
   //this request the data from /maps GET route and renders all map items
   const loadMaps = function() {
     $.ajax('/maps', { method: 'GET' })
-    .then(function (mapsText) {
-      console.log('Success: ', mapsText);
-      renderMaps(mapsText);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
-  }
-const mapDataIsValid = function(textString) {
+      .then(function(mapsText) {
+        console.log('Success: ', mapsText);
+        renderMaps(mapsText);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  };
+  const mapDataIsValid = function(textString) {
 
-  // if (!textString) {
-  //   $("#error-msg").text("Error: The tweet contains no message.");
-  //   $("#error-msg").slideDown();
-  //   return false;
-  // }
-  //   if (textString.length > 140) {
+    // if (!textString) {
+    //   $("#error-msg").text("Error: The tweet contains no message.");
+    //   $("#error-msg").slideDown();
+    //   return false;
+    // }
+    //   if (textString.length > 140) {
 
   //   $("#error-msg").text("Error: The tweet message is too long.");
   //   $("#error-msg").slideDown();
@@ -53,7 +53,7 @@ const mapDataIsValid = function(textString) {
   // }
   // $("#error-msg").hide();
   // return true;
-}
+  };
 
   $(function() {
     let  request = null;
