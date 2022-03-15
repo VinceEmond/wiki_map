@@ -1,21 +1,34 @@
 // Client facing scripts here
 
 
-$(document).ready(function() {
+/****************************/
+/*     AFTER HTML LOADS     */
+/****************************/
+$(() => {
 
-  //this escapes the content
+
+  /****************************/
+  /*        VARIABLES         */
+  /****************************/
+  const $newMapPoint = $('.new_pin_list form');
+
+
+  /****************************/
+  /*        FUNCTIONS         */
+  /****************************/
+
   const escape = function(str) {
     let div = document.createElement("div");
     div.appendChild(document.createTextNode(str));
     return div.innerHTML;
   };
 
-  //Create element for Single Map point
+  // Create element for Single Map point
   const createMapPointElement = function(mapPointData) {
     const {name, description} = mapPointData;
 
     const $mapPoint = $(`
-      <div class="map_points_list_wrapper">
+      <div class="map_point_element_wrapper">
         <p class="name">${escape(name)}</p>
         <p>${escape(description)}</p>
       </d>
@@ -23,7 +36,7 @@ $(document).ready(function() {
     return $mapPoint;
   };
 
-  //Loops through all Map_points and appends to .ejs template
+  // Loops through all Map_points and appends to .ejs template
   const renderMapPointsList = function(dataObj) {
     const mapPointsArr = dataObj.mapPoints;
     for (let mapPoint of mapPointsArr) {
@@ -33,67 +46,58 @@ $(document).ready(function() {
     return;
   };
 
-  //this request the data from /maps GET route and renders all map items
   const loadMapPoints = function() {
-    // console.log('Made it to top of loadMapPoints');
-    $.ajax('/map_points', { method: 'GET' })
+    const queryObj = {
+      map_id: 1
+    };
+
+    $.ajax({url: "/map_points", method: 'GET', data: queryObj})
       .then((mapPointsObj) => {
-        $(".map_points_list_wrapper").remove();
+        // Clears entire div of all existing map_points
+        $(".map_point_element_wrapper").remove();
+        // Render Map points with object returned from database
         renderMapPointsList(mapPointsObj);
       })
       .catch(err => {
         console.log('Load Map Points Error', err);
-        // res.status(500)
-        //   .json({ error: err.message });
       });
   };
 
-  const $newMapPoint = $('.new_pin_list form');
 
+  /****************************/
+  /*      EVENT LISTENERS     */
+  /****************************/
 
   $newMapPoint.submit(function(event) {
     event.preventDefault();
 
     const dataFromInputs = {
-      newPinTitle: $("#ptitle").val(),
-      newPinDesc: $("#pdesc").val()
+      map_id: 1,
+      owner_id: 3,
+      name: $("#ptitle").val(),
+      description: $("#pdesc").val(),
+      coord_x: 49.286328837515256,
+      coord_y: -123.12303651918343,
+      zoom: 16,
+      image: 'https://lh5.googleusercontent.com/p/AF1QipO4u7FUScRtr2QGIF9nrrbr4We-JZs9P9WixOcE=w408-h271-k-no'
     };
 
     $.ajax({ url: "/map_points", method: "POST", data: dataFromInputs})
       .then((response, status) =>  {
-        console.log('Succesfully added new map pin!');
+        console.log('Succesfully added new map point!');
+        console.log("The new map point ID is: ", response.newMapPoint.id);
         loadMapPoints();
       })
       .catch((err) => {
         console.log("Error :", console.err.message);
       });
 
-
-
-    // // Callback handler that will be called on failure
-    // request.fail(function(jqXHR, status, error) {
-    //   //if there was a failure
-    //   console.error("The form POST failed. Error: " + status, error);
-    // });
-
-
-    // $.ajax('/map_points', { method: 'POST' })
-    // .then((mapPointsObj) => {
-    //   console.log('Created new map point!');
-    //   renderMapPointsList(mapPointsObj);
-    // })
-    // .catch(err => {
-    //   console.log('Creat New Map Points Error', err);
-
-    // });
-
   });
 
-  // $form.submit(function(event) {
-  //   event.preventDefault();
-  // $mapPointsList.on('click', function() {
-  //   console.log("Cli");
-  // });
+
+  /****************************/
+  /*     ON INITIAL LOAD      */
+  /****************************/
 
   loadMapPoints();
 
