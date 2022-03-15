@@ -1,6 +1,5 @@
 // Client facing scripts here
 
-
 /****************************/
 /*     AFTER HTML LOADS     */
 /****************************/
@@ -43,6 +42,7 @@ $(() => {
     for (let mapPoint of mapPointsArr) {
       const $mapPoint = createMapPointElement(mapPoint);
       $('.map_points_list').prepend($mapPoint);
+      generatePin(mapPoint.coord_x, mapPoint.coord_y, mapPoint.image, mapPoint.name, mapPoint.description);
     }
     return;
   };

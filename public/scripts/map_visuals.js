@@ -1,8 +1,13 @@
 let map;
 
+// Place new pin on the map at lat, lng
+const generatePin = function(lat, lng, img, name, desc) {
+  marker = L.marker([lat, lng]).addTo(map);
+  marker.bindPopup(`<img src='${img}' width='50' height='50'><br><b>${name}</b><br>${desc}`);
+};
+
 function initMap() {
-  console.log('hit');
-  let map = L.map('map').setView([49.285395314699244, -123.12673661801905], 13);
+  map = L.map('map').setView([49.285395314699244, -123.12673661801905], 13);
   L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXRoYW5sb2V3ZW4iLCJhIjoiY2wwb2JhamMwMWl5bDNsbmVuczI2aXBrZyJ9.tfw9ypNjnVAzLUqlUTNZ4g', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
@@ -29,12 +34,14 @@ function initMap() {
     if (updatePin === false) {
       let newLatLng = new L.LatLng(lat, lng);
       marker.setLatLng(newLatLng);
+      alert(marker.getLatLng());
       console.log('updated...');
       return false;
     }
     updatePin = false;
 
     marker = L.marker([lat, lng]).addTo(map);
+    alert(marker.getLatLng());
     marker.bindPopup("<img src='images/location_example.png' width='50' height='50'><br><b> Hey There! </b><br> This is a description");
     return false; // To disable default popup.
   });
