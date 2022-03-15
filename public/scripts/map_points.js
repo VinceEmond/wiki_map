@@ -11,6 +11,7 @@ $(() => {
   /*        VARIABLES         */
   /****************************/
   const $newMapPoint = $('.new_pin_list form');
+  const $deleteMapPoint = $('#REPLACE-ME-WITH-A-TAG');
 
 
   /****************************/
@@ -68,11 +69,15 @@ $(() => {
   /*      EVENT LISTENERS     */
   /****************************/
 
+
+  // Create a new map_point
   $newMapPoint.submit(function(event) {
     event.preventDefault();
 
-    const dataFromInputs = {
-      map_id: 1,
+    const currentMapId = 1;
+
+    const dataForCall = {
+      map_id: currentMapId,
       owner_id: 3,
       name: $("#ptitle").val(),
       description: $("#pdesc").val(),
@@ -82,17 +87,40 @@ $(() => {
       image: 'https://lh5.googleusercontent.com/p/AF1QipO4u7FUScRtr2QGIF9nrrbr4We-JZs9P9WixOcE=w408-h271-k-no'
     };
 
-    $.ajax({ url: "/map_points", method: "POST", data: dataFromInputs})
+    $.ajax({ url: "/map_points", method: "POST", data: dataForCall})
       .then((response, status) =>  {
-        console.log('Succesfully added new map point!');
-        console.log("The new map point ID is: ", response.newMapPoint.id);
+        console.log(`Created a new map point on map_id ${currentMapId}. The new map_point's ID is: `, response.newMapPoint.id);
         loadMapPoints();
       })
       .catch((err) => {
         console.log("Error :", console.err.message);
       });
+  });
+
+  // Delete an existing map_point
+  $deleteMapPoint.on('click',function(event) {
+    event.preventDefault();
+
+    const currentMapId = 1;
+    const currentMapPointId = 1;
+
+    const dataForCall = {
+      map_id: currentMapId,
+      map_point_id: currentMapPointId
+    };
+
+    $.ajax({ url: `map_points/${currentMapPointId}/delete`, method: "POST", data: dataForCall})
+      .then((response, status) => {
+        console.log(`Map ID ${currentMapId}'s map_point ${currentMapPointId} has been made inactive.`);
+        loadMapPoints();
+      })
+      .catch((err) => {
+        console.log("Error :", err.message);
+      });
+
 
   });
+
 
 
   /****************************/

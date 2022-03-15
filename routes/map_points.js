@@ -17,9 +17,13 @@ module.exports = (db) => {
     const {map_id} = req.query;
 
     /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
-    /*   NOTE: req.query will be undefined when accessing via direct url  */
+    /*   NOTE: req.query will be undefined when accessing via direct url such as localhost/map_points
     /*   This subsquently breaks the JSON query */
     /*   and will not populate the /map_points */
+    /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+    /*  This route needs to be moved into GET /maps/:id/map_points
+    /*  which will allow us to access the map id from req.params
+    /*  in order to specify which map_points we want to obtain
     /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
 
     // console.log("req.query.map_id", req.query.map_id);
@@ -27,7 +31,8 @@ module.exports = (db) => {
     const queryStr = `
       SELECT *
       FROM map_points
-      WHERE map_id = $1;`;
+      WHERE map_id = $1
+      AND active IS true;`;
 
     // console.log('map_id', map_id);
     const queryParams = [req.query.map_id];
@@ -82,9 +87,6 @@ module.exports = (db) => {
   });
 
 
-
-
-
   // POST map_points/   ---   Add a new map_point
   router.post("/", (req,res) => {
     const {
@@ -119,6 +121,35 @@ module.exports = (db) => {
         console.log("Error:", err);
       });
   });
+
+  // POST map_points/:id/delete   ---   Read details for an existing map_point
+  router.post('/:id/delete', (req, res) => {
+
+    const map_point_id = 1;
+    const map_id = 1;
+
+    const queryStr = `
+    UPDATE map_points
+    SET active = false
+    WHERE map_points.map_id = $1
+    AND map_points.id = $2;
+    `;
+
+    const queryParams = [map_id,map_point_id];
+
+    db.query(queryStr, queryParams)
+      .then((response) => {
+        console.log('Set the map_point to inactive');
+        res.json({});
+      })
+      .catch((err) => {
+        console.log("Error", err);
+      });
+
+
+  });
+
+
 
   return router;
 };
