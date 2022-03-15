@@ -111,7 +111,7 @@ module.exports = (db) => {
     db.query(queryStr, queryParams)
       .then(response => {
         const mapPoints = response.rows;
-        console.log('response.rows', response.rows[0]);
+        // console.log('response.rows', response.rows[0]);
         // console.log('New Map Point ID', response.rows[0]);
         // res.json({ mapPoints });
         res.json({ newMapPoint: response.rows[0]});
