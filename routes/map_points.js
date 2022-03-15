@@ -44,6 +44,46 @@ module.exports = (db) => {
       });
   });
 
+  // GET map_points/:id   ---   Read details for an existing map_point
+  router.get("/:id", (req, res) => {
+
+    // Value of which map to get points for
+    // const {map_id} = req.query;
+    // console.log('map_id', map_id);
+    // const queryParams = [req.query.map_id];
+
+    // console.log('Req Params', req.params);
+    const {id} = req.params;
+    const queryParams = [id];
+
+    /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+    /*  NOTE: Currently hardcoded to only show map_points for one map
+    /*  This route needs to be moved into GET /maps/:id/map_points/:id
+    /*  which will allow us to access the map id from req.params
+    /*  in order to specify which map_points we want to obtain
+    /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+
+    const queryStr = `
+      SELECT *
+      FROM map_points
+      WHERE map_points.id = $1
+      AND map_id = 1;`;
+
+    db.query(queryStr,queryParams)
+      .then(response => {
+        const mapPoints = response.rows;
+        res.json({ mapPoints });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
+
+
+
 
   // POST map_points/   ---   Add a new map_point
   router.post("/", (req,res) => {
