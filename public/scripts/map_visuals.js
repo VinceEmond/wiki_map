@@ -26,14 +26,13 @@ function initMap() {
     // Prevent the browser's context menu from appearing
     event.preventDefault();
 
-    if (testBool === false) {
+    if (updatePin === false) {
       let newLatLng = new L.LatLng(lat, lng);
       marker.setLatLng(newLatLng);
-      console.log('we in here');
+      console.log('updated...');
       return false;
     }
-    testBool = false;
-
+    updatePin = false;
 
     marker = L.marker([lat, lng]).addTo(map);
     marker.bindPopup("<img src='images/location_example.png' width='50' height='50'><br><b> Hey There! </b><br> This is a description");
