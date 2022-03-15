@@ -16,8 +16,10 @@ module.exports = (db) => {
   router.use((req, res, next) => {
     if (!req.cookies) {
       res.redirect('/login');
+      return;
     } else if (!req.cookies.user_id) {
       res.redirect('/login');
+      return;
     }
     next();
   });
@@ -43,8 +45,8 @@ module.exports = (db) => {
     db.query(`
       SELECT *
       FROM maps
-      WHERE active = true AND id = $1
-      LIMIT 10;`
+      WHERE active = true
+      AND id = $1;`
     ,[req.params.id])
       .then(data => {
         const map = data.rows[0];
@@ -66,8 +68,11 @@ module.exports = (db) => {
     $4,
     $5,
     $6) RETURNING *;`;
+    const { owner_id, name, desc, mapCoordX, mapCoordY, zoom } = req.body;
 
-    return db.query(str,[req.body.owner_id, req.body.map_name, req.body.map_desc, req.body.mapCoordX, req.body.mapCoordY, req.body.mapZoom])
+    const queryParams = [owner_id, name, desc, mapCoordX, mapCoordY, zoom];
+
+    return db.query(str, queryParams)
       .then(result => {
         res.json({ maps: result.rows[0] });
       })

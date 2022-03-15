@@ -14,8 +14,10 @@ module.exports = (db) => {
   router.use((req, res, next) => {
     if (!req.cookies) {
       res.redirect('/login');
+      return;
     } else if (!req.cookies.user_id) {
       res.redirect('/login');
+      return;
     }
     next();
   });

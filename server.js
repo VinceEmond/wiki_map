@@ -36,9 +36,9 @@ app.use(
 );
 app.use(express.static("public"));
 
-const usersRoutes = require("./routes/users");
-const maps = require("./routes/maps");
-const login = require("./routes/login");
+const usersRoutes = require("./routes/users_route");
+const maps = require("./routes/maps_route");
+const login = require("./routes/login_route");
 
 // XXXXXXXXXXXXXXXXXXXXXXXXXXX
 //          ROUTES
