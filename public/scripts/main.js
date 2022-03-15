@@ -1,0 +1,1 @@
+let currentMapId = 4;

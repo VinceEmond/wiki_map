@@ -1,9 +1,16 @@
 let map;
+let newPinLng;
+let newPinLat;
 
 // Place new pin on the map at lat, lng
 const generatePin = function(lat, lng, img, name, desc) {
   marker = L.marker([lat, lng]).addTo(map);
   marker.bindPopup(`<img src='${img}' width='50' height='50'><br><b>${name}</b><br>${desc}`);
+};
+
+// Set view and zoom for the map
+const setView = function(lat, lng, zoom) {
+  map.setView([lat, lng], zoom);
 };
 
 function initMap() {
@@ -34,15 +41,16 @@ function initMap() {
     if (updatePin === false) {
       let newLatLng = new L.LatLng(lat, lng);
       marker.setLatLng(newLatLng);
-      alert(marker.getLatLng());
-      console.log('updated...');
+      newPinLat = lat;
+      newPinLng = lng;
       return false;
     }
     updatePin = false;
 
     marker = L.marker([lat, lng]).addTo(map);
-    alert(marker.getLatLng());
     marker.bindPopup("<img src='images/location_example.png' width='50' height='50'><br><b> Hey There! </b><br> This is a description");
+    newPinLat = lat;
+    newPinLng = lng;
     return false; // To disable default popup.
   });
 

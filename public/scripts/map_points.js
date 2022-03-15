@@ -49,7 +49,8 @@ $(() => {
 
   const loadMapPoints = function() {
     const queryObj = {
-      map_id: 1
+      // set the current map
+      map_id: currentMapId
     };
 
     $.ajax({url: "/map_points", method: 'GET', data: queryObj})
@@ -73,6 +74,7 @@ $(() => {
   // Create a new map_point
   $newMapPoint.submit(function(event) {
     event.preventDefault();
+    console.log('newPinLat', newPinLat, 'newPinLng', newPinLng);
 
     const currentMapId = 1;
 
