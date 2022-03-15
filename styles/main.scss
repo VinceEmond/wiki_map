@@ -37,6 +37,14 @@ nav button {
   margin-left: 10px;
 }
 
+nav span {
+  position: absolute;
+  right: 20px;
+  background-color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
 @keyframes buttonDown {
   from {margin-top: 0px;}
   to {margin-top: 6px;}
@@ -73,8 +81,7 @@ nav button:hover {
   padding: 10px 15px;
   position: fixed;
   width: 17.9%;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+  border-radius: 5px;
   font-size: 18px;
 }
 

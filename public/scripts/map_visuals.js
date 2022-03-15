@@ -19,13 +19,24 @@ function initMap() {
     lng = ev.latlng.lng;
   });
 
+  let marker;
+  let updatePin = true;
+
   document.getElementById("map").addEventListener("contextmenu", function (event) {
     // Prevent the browser's context menu from appearing
     event.preventDefault();
 
-    let marker = L.marker([lat, lng]).addTo(map);
-    marker.bindPopup("<img src='images/location_example.png' width='50' height='50'><br><b> Hey There! </b><br> This is a description");
+    if (testBool === false) {
+      let newLatLng = new L.LatLng(lat, lng);
+      marker.setLatLng(newLatLng);
+      console.log('we in here');
+      return false;
+    }
+    testBool = false;
 
+
+    marker = L.marker([lat, lng]).addTo(map);
+    marker.bindPopup("<img src='images/location_example.png' width='50' height='50'><br><b> Hey There! </b><br> This is a description");
     return false; // To disable default popup.
   });
 
@@ -81,25 +92,31 @@ function initMap() {
   $('#maps-button').click(() => {
     $('.maps_list').slideToggle();
     hideFolders('.maps_list');
+    removeFolderSpace('.folder:nth-of-type(2)');
   });
   $('#pins-button').click(() => {
     $('.map_points_list').slideToggle();
     hideFolders('.map_points_list');
+    removeFolderSpace('.folder:nth-of-type(3)');
   });
   $('#fav-button').click(() => {
     $('.favourites_list').slideToggle();
     hideFolders('.favourites_list');
+    removeFolderSpace('.folder:nth-of-type(4)');
   });
   $('#contrib-button').click(() => {
     $('.contributed_maps_list').slideToggle();
     hideFolders('.contributed_maps_list');
+    removeFolderSpace('.folder:nth-of-type(5)');
   });
   $('#new-map-button').click(() => {
     $('.new_map_list').slideToggle();
     hideFolders('.new_map_list');
+    removeFolderSpace('.folder:nth-of-type(6)');
   });
   $('#new-pin-button').click(() => {
     $('.new_pin_list').slideToggle();
     hideFolders('.new_pin_list');
+    removeFolderSpace('.folder:nth-of-type(7)');
   });
 }
