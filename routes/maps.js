@@ -39,11 +39,12 @@ module.exports = (db) => {
     13);`;
     console.log('queryStr:',str);
     db.query(str,[req.body.map_name, req.body.map_desc])
-    .then(res => {
-      console.log("success1");
-    })
-      .catch(err => { console.log("err:", err.message); res.json({ error: err.message });
-    });
+      .then(res => {
+        console.log("success1");
+      })
+      .catch(err => {
+        console.log("err:", err.message); res.json({ error: err.message });
+      });
 
   });
   return router;

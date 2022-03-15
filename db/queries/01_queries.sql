@@ -85,12 +85,13 @@
     WHERE map_points.id = 1;
 
 -- POST map_points/:id   ---   Edit details for an existing map_point
-    UPDATE map_points
-    SET name = 'UpdatedMapPointName',
-    description = 'Updated Map Point Description',
-    image = 'www.updatedmappointimageurl.com'
-    WHERE maps.id = 1
-    RETURNING *;
+      UPDATE map_points
+      SET name = 'UpdatedMapPointName',
+      description = 'Updated Map Point Description',
+      image = 'www.updatedmappointimageurl.com'
+      WHERE map_points.map_id = 1
+      AND map_points.id = 1
+      RETURNING *;
 
 -- POST map_points/   ---   Add a new map_point
     INSERT INTO map_points (map_id, owner_id, name, coord_x, coord_y, zoom, description, image) VALUES (

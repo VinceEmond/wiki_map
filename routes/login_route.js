@@ -9,17 +9,20 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-  router.get("/", (req, res) => {
-    db.query(`SELECT * FROM users;`)
-      .then(data => {
-        const users = data.rows;
-        res.json({ users });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
+
+  router.get('/', (req, res) => {
+    const demoUserId = 1;
+    // send the user to the login/:id
+    res.redirect('/login/' + demoUserId);
+  });
+
+  router.get('/:id', (req, res) => {
+    // set the cookie
+    res.cookie('user_id', req.params.id);
+
+    // send the user to the main page
+    res.redirect('/');
   });
   return router;
 };
+

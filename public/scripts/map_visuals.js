@@ -12,7 +12,7 @@ function initMap() {
     accessToken: 'pk.eyJ1IjoiZXRoYW5sb2V3ZW4iLCJhIjoiY2wwb2JhamMwMWl5bDNsbmVuczI2aXBrZyJ9.tfw9ypNjnVAzLUqlUTNZ4g'
   }).addTo(map);
 
-  var lat, lng;
+  let lat, lng;
 
   map.addEventListener('mousemove', function(ev) {
     lat = ev.latlng.lat;
@@ -22,7 +22,7 @@ function initMap() {
   let marker;
   let updatePin = true;
 
-  document.getElementById("map").addEventListener("contextmenu", function (event) {
+  document.getElementById("map").addEventListener("contextmenu", function(event) {
     // Prevent the browser's context menu from appearing
     event.preventDefault();
 
@@ -40,20 +40,20 @@ function initMap() {
   });
 
   // hide all other folders
-  const hideFolders = function (selector) {
+  const hideFolders = function(selector) {
     $(selector).toggleClass('hide');
     $('.hide').slideUp();
     $(selector).toggleClass('hide');
   };
 
   // remove unwanted space bellow the current opened folder
-  const removeFolderSpace = function (selector) {
+  const removeFolderSpace = function(selector) {
     $('.folder').addClass("push-next");
     // only runs if the clicked folder is not the current open one
     if (!$(`${selector} .hide`).height() > 0) {
       $(selector).removeClass('push-next');
     }
-  }
+  };
 
   // Collapse folder sections on click
   $('#maps-collapse').click(() => {
