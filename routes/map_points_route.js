@@ -15,6 +15,7 @@ module.exports = (db) => {
 
     // Value of which map to get points for
     const {map_id} = req.query;
+    // const map_id = 1;
 
     /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
     /*   NOTE: req.query will be undefined when accessing via direct url such as localhost/map_points
@@ -35,7 +36,7 @@ module.exports = (db) => {
       AND active IS true;`;
 
     // console.log('map_id', map_id);
-    const queryParams = [req.query.map_id];
+    const queryParams = [map_id];
 
     db.query(queryStr, queryParams)
       .then(response => {
@@ -56,10 +57,11 @@ module.exports = (db) => {
     // const {map_id} = req.query;
     // console.log('map_id', map_id);
     // const queryParams = [req.query.map_id];
-
     // console.log('Req Params', req.params);
+
     const {id} = req.params;
-    const queryParams = [id];
+    const map_id = 1;  //  SEE LARGE NOTE BELLOW
+    const queryParams = [id, map_id];
 
     /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
     /*  NOTE: Currently hardcoded to only show map_points for one map
@@ -72,7 +74,7 @@ module.exports = (db) => {
       SELECT *
       FROM map_points
       WHERE map_points.id = $1
-      AND map_id = 1;`;
+      AND map_id = $2;`;
 
     db.query(queryStr,queryParams)
       .then(response => {
@@ -111,14 +113,12 @@ module.exports = (db) => {
     db.query(queryStr, queryParams)
       .then(response => {
         const mapPoints = response.rows;
-        // console.log('response.rows', response.rows[0]);
-        // console.log('New Map Point ID', response.rows[0]);
-        // res.json({ mapPoints });
         res.json({ newMapPoint: response.rows[0]});
-        // return response.rows[0];
       })
-      .catch((err) => {
-        console.log("Error:", err);
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
       });
   });
 
@@ -142,13 +142,12 @@ module.exports = (db) => {
         console.log('Set the map_point to inactive');
         res.json({});
       })
-      .catch((err) => {
-        console.log("Error", err);
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
       });
-
-
   });
-
 
 
   return router;

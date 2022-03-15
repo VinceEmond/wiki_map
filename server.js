@@ -33,7 +33,7 @@ app.use(express.static("public"));
 
 const usersRoutes = require("./routes/users");
 const maps = require("./routes/maps");
-const mapPoints = require("./routes/map_points");
+const mapPoints = require("./routes/map_points_route");
 
 
 // XXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -42,9 +42,12 @@ const mapPoints = require("./routes/map_points");
 // Mount all resource routes here
 // (Don't forget to "require" them above as well)
 
+// const currentMapId = 1;
+
 app.use("/users", usersRoutes(db));
+// app.use(`/maps/${currentMapId}/map_points`, mapPoints(db));
+app.use(`/map_points`, mapPoints(db));
 app.use("/maps", maps(db));
-app.use("/map_points", mapPoints(db));
 
 // Home page
 app.get("/", (req, res) => {
