@@ -29,53 +29,61 @@ function initMap() {
     return false; // To disable default popup.
   });
 
-  const hideFolders = function () {
-
+  const hideFolders = function (selector) {
+    $(selector).toggleClass('hide');
+    $('.hide').slideUp();
+    $(selector).toggleClass('hide');
   };
 
   // Collapse folder sections on click
   $('#maps-collapse').click(() => {
     $('.maps_list').slideToggle();
-    $('.maps_list').toggleClass('hide');
-    $('.hide').slideUp();
-    $('.maps_list').toggleClass('hide');
+    hideFolders('.maps_list');
   });
   $('#pins-collapse').click(() => {
     $('.map_points_list').slideToggle();
-    $('.map_points_list').toggleClass('hide');
-    $('.hide').slideUp();
-    $('.map_points_list').toggleClass('hide');
+    hideFolders('.map_points_list');
   });
   $('#fav-collapse').click(() => {
     $('.favourites_list').slideToggle();
+    hideFolders('.favourites_list');
   });
   $('#contrib-collapse').click(() => {
     $('.contributed_maps_list').slideToggle();
+    hideFolders('.contributed_maps_list');
   });
   $('#new-map-collapse').click(() => {
     $('.new_map_list').slideToggle();
+    hideFolders('.new_map_list');
   });
   $('#new-pin-collapse').click(() => {
     $('.new_pin_list').slideToggle();
+    hideFolders('.new_pin_list');
   });
 
   // Make nav buttons collapse/expand their associated folders
   $('#maps-button').click(() => {
     $('.maps_list').slideToggle();
+    hideFolders('.maps_list');
   });
   $('#pins-button').click(() => {
     $('.map_points_list').slideToggle();
+    hideFolders('.map_points_list');
   });
   $('#fav-button').click(() => {
     $('.favourites_list').slideToggle();
+    hideFolders('.favourites_list');
   });
   $('#contrib-button').click(() => {
     $('.contributed_maps_list').slideToggle();
+    hideFolders('.contributed_maps_list');
   });
   $('#new-map-button').click(() => {
     $('.new_map_list').slideToggle();
+    hideFolders('.new_map_list');
   });
   $('#new-pin-button').click(() => {
     $('.new_pin_list').slideToggle();
+    hideFolders('.new_pin_list');
   });
 }
