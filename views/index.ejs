@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Home Page</title>
+  <title>Wiki Maps</title>
 
   <!-- Map API links -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
@@ -11,7 +11,7 @@
     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
     crossorigin="">
   </script>
-  <script type="text/javascript" src="/scripts/map.js"></script>
+  <script type="text/javascript" src="/scripts/map_visuals.js"></script>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
@@ -33,8 +33,9 @@
     <button type="button" id="pins-button"><i class="fa-solid fa-location-dot"></i> Pins</button>
     <button type="button" id="fav-button"><i class="fa-solid fa-star"></i> Favorites</button>
     <button type="button" id="contrib-button"><i class="fa-solid fa-handshake-angle"></i> Contributions</button>
-    <button type="button" id="new-map-button"><i class="fa-solid fa-circle-plus"></i> New Map</button>
+    <button type="button" id="new-map-button"><i class="fa-solid fa-square-plus"></i> New Map</button>
     <button type="button" id="new-pin-button"><i class="fa-solid fa-circle-plus"></i> New Pin</button>
+    <span>Logged in as</span>
   </nav>
 
   <section id="side-bar">
@@ -44,39 +45,39 @@
       <h1>Wiki Maps</h1>
     </div>
 
-    <div class="folder">
+    <div class="folder push-next">
       <div id="maps-collapse">
         <h2><i class="fa-solid fa-earth-americas"></i>Maps<i class="fa-solid fa-angle-down"></i></h2>
       </div>
-      <div class="maps_list"> Maps here...</div>
+      <div class="maps_list hide"> Maps here...</div>
     </div>
 
-    <div class="folder push-top">
+    <div class="folder push-next">
       <div id="pins-collapse">
         <h2><i class="fa-solid fa-location-dot"></i>Pins<i class="fa-solid fa-angle-down"></i></h2>
       </div>
-      <div class="map_points_list">Maps Points here...</div>
+      <div class="map_points_list hide">Maps Points here...</div>
     </div>
 
-    <div class="folder push-top">
+    <div class="folder push-next">
       <div id="fav-collapse">
         <h2><i class="fa-solid fa-star"></i>Favourites<i class="fa-solid fa-angle-down"></i></h2>
       </div>
-      <div class="favourites_list">Favourite Maps here...</div>
+      <div class="favourites_list hide">Favourite Maps here...</div>
     </div>
 
-    <div class="folder push-top">
+    <div class="folder push-next">
       <div id="contrib-collapse">
         <h2><i class="fa-solid fa-handshake-angle"></i>Contributions<i class="fa-solid fa-angle-down"></i></h2>
       </div>
-      <div class="contributed_maps_list">Maps I Contributed to here...</div>
+      <div class="contributed_maps_list hide">Maps I Contributed to here...</div>
     </div>
 
-    <div class="folder push-top">
+    <div class="folder push-next">
       <div id="new-map-collapse">
-        <h2><i class="fa-solid fa-circle-plus"></i>New Map<i class="fa-solid fa-angle-down"></i></h2>
+        <h2><i class="fa-solid fa-square-plus"></i>New Map<i class="fa-solid fa-angle-down"></i></h2>
       </div>
-      <div class="new_map_list">
+      <div class="new_map_list hide">
         <form action="" method="post">
           <label for="mtitle">Title:</label>
           <input type="text" id="mtitle" name="mtitle"><br><br>
@@ -87,17 +88,17 @@
       </div>
     </div>
 
-    <div class="folder push-top">
+    <div class="folder push-next">
       <div id="new-pin-collapse">
         <h2><i class="fa-solid fa-circle-plus"></i>New Pin<i class="fa-solid fa-angle-down"></i></h2>
       </div>
-      <div class="new_pin_list">
+      <div class="new_pin_list hide">
         <form action="" method="post">
           <label for="ptitle">Title:</label>
           <input type="text" id="ptitle" name="ptitle"><br><br>
           <label for="pdesc">Description:</label>
           <input type="text" id="pdesc" name="pdesc"><br><br>
-          <input type="submit" value="Submit" id="msubmit">
+          <input type="submit" value="Submit" id="psubmit">
         </form>
       </div>
     </div>
