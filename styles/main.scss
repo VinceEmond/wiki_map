@@ -86,6 +86,17 @@ nav button:hover {
   display: none;
 }
 
+// add transition time to smooth out the changes
+@keyframes shrinkBottom {
+  from {margin-bottom: 60px;}
+  to {margin-bottom: 25px;}
+}
+
+@keyframes extendBottom {
+  from {margin-bottom: 25px;}
+  to {margin-bottom: 60px;}
+}
+
 .folder {
   max-height: 400px; //The max height a folder can be
   width: 90%;
@@ -93,6 +104,13 @@ nav button:hover {
   border-radius: 5px;
   overflow: auto;
   position: relative;
+  animation: shrinkBottom 0.5s forwards;
+  //margin-bottom: 30px;
+}
+
+// must be after '.folder' to override it
+.push-next {
+  animation: extendBottom 0.5s forwards;
 }
 
 .folder h2 i:first-of-type {
@@ -113,8 +131,6 @@ nav button:hover {
   text-align: right;
 }
 
-.push-top {
-  margin-top: 60px;
-}
+
 
 

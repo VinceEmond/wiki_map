@@ -29,36 +29,52 @@ function initMap() {
     return false; // To disable default popup.
   });
 
+  // hide all other folders
   const hideFolders = function (selector) {
     $(selector).toggleClass('hide');
     $('.hide').slideUp();
     $(selector).toggleClass('hide');
   };
 
+  // remove unwanted space bellow the current opened folder
+  const removeFolderSpace = function (selector) {
+    $('.folder').addClass("push-next");
+    // only runs if the clicked folder is not the current open one
+    if (!$(`${selector} .hide`).height() > 0) {
+      $(selector).removeClass('push-next');
+    }
+  }
+
   // Collapse folder sections on click
   $('#maps-collapse').click(() => {
     $('.maps_list').slideToggle();
     hideFolders('.maps_list');
+    removeFolderSpace('.folder:nth-of-type(2)');
   });
   $('#pins-collapse').click(() => {
     $('.map_points_list').slideToggle();
     hideFolders('.map_points_list');
+    removeFolderSpace('.folder:nth-of-type(3)');
   });
   $('#fav-collapse').click(() => {
     $('.favourites_list').slideToggle();
     hideFolders('.favourites_list');
+    removeFolderSpace('.folder:nth-of-type(4)');
   });
   $('#contrib-collapse').click(() => {
     $('.contributed_maps_list').slideToggle();
     hideFolders('.contributed_maps_list');
+    removeFolderSpace('.folder:nth-of-type(5)');
   });
   $('#new-map-collapse').click(() => {
     $('.new_map_list').slideToggle();
     hideFolders('.new_map_list');
+    removeFolderSpace('.folder:nth-of-type(6)');
   });
   $('#new-pin-collapse').click(() => {
     $('.new_pin_list').slideToggle();
     hideFolders('.new_pin_list');
+    removeFolderSpace('.folder:nth-of-type(7)');
   });
 
   // Make nav buttons collapse/expand their associated folders
