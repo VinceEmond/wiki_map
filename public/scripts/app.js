@@ -1,5 +1,12 @@
 // Client facing scripts here
-
+// Map {
+//   id: 'id',
+//   name: 'name',
+//   description: 'description',
+//   coordX: 'coord_X',
+//   coordY: 'coord_Y',
+//   zoom: 'zoom'
+// };
 
 $(document).ready(function() {
   //this escapes the content
@@ -12,7 +19,7 @@ $(document).ready(function() {
   const createMapElement = function(mapData) {
 
     const $map = $(`
-      <p class="name">${escape(mapData.name)}</p>
+      <p class="name"><a href="/maps/${escape(mapData.id)}">${escape(mapData.name)}</a></p>
       <p>${escape(mapData.description)}</p>
     `);
     return $map;
@@ -57,43 +64,81 @@ $(document).ready(function() {
 
   $(function() {
     let  request = null;
-    const $form = $('form');
-    //****************TODO****************************/
-    //*****this maps submit/POST needs work **********/
-    //************************************************/
-    $form.submit(function (event) {
+    const $form = $('.new_map_list form');
+    //****** ROUTE: POST maps/ ************/
+    //Save new maps and recreate the sidebar list.
+    $form.submit(function(event) {
       event.preventDefault();
-      const mapName = $("#map_name").val();
-      const mapDesc = $("#map_desc").val();
-      console.log("mapName:",mapName);
 
-      let queryStr = $form.find("button, input, input");
-      queryStr = { map_name: mapName, map_desc: mapDesc };
-      console.log("queryStr:", queryStr);
-      console.log("thisSerialize:",$( this ).serialize());
-      console.log("formSerialize:",$form.serialize());
+      let queryObj = {
+        owner_id: 1,
+        map_name: $("#mtitle").val(),
+        map_desc: $("#mdesc").val(),
+        mapCoordX: 1,
+        mapCoordY: 2,
+        mapZoom: 10
+      };
+      console.log("queryObj:", queryObj);
+
       //****************TODO****************************/
       //**Add data validation here**/
 
-      //****************TODO****************************/
-      //** "/maps" POST route to add a map needs to be created in routes/maps.js **/
-      request = $.ajax({ url: "/maps", method: "POST", data: queryStr});
+      request = $.ajax({ url: "/maps", method: "POST", data: queryObj});
       // Callback handler that will be called on success
-      request.done(function (response, status, jqXHR){
-        console.log("Map POST successful.");
+      request.done(function(response, status, jqXHR) {
+        console.log("Map POST successful. MapID:", response.maps.id);
         //if successful clear out the text values.
-        $("#map_name").val("");
-        $("#map_desc").val("");
+        $("#mtitle").val("");
+        $("#mdesc").val("");
         loadMaps();
       });
       // Callback handler that will be called on failure
-      request.fail(function (jqXHR, status, error){
+      request.fail(function(jqXHR, status, error) {
         //if there was a failure
         console.error("The form POST failed. Error: " + status, error);
       });
       // Callback handler that will be called regardless
       // if the request failed or succeeded
-      request.always(function () {
+      request.always(function() {
+        //$inputs.prop("disabled", false);
+      });
+    });
+    //****** ROUTE: GET maps/:id ************/
+    //this is the map selection form the maps list.
+    //it fires when a map link is clicked and then gets the details of the map
+    //and renders it.
+    const $mapLink = $('.map_name a');
+    $mapLink.on('click', function(event) {
+      event.preventDefault();
+
+      let queryObj = {
+        owner_id: 1,
+        map_name: $("#mtitle").val(),
+        map_desc: $("#mdesc").val(),
+        mapCoordX: 1,
+        mapCoordY: 2,
+        mapZoom: 10
+      };
+      console.log("Get Map queryObj:", queryObj);
+
+      //****************TODO****************************/
+      //**Add data validation here**/
+
+      request = $.ajax({ url: "/maps/:id", method: "GET", data: queryObj});
+      // Callback handler that will be called on success
+      request.done(function(response, status, jqXHR) {
+        console.log("Map GET successful. MapID:", response.map.id);
+        //*****Open the Selected Map *******/
+        //loadMap();
+      });
+      // Callback handler that will be called on failure
+      request.fail(function(jqXHR, status, error) {
+        //if there was a failure
+        console.error("The form POST failed. Error: " + status, error);
+      });
+      // Callback handler that will be called regardless
+      // if the request failed or succeeded
+      request.always(function() {
         //$inputs.prop("disabled", false);
       });
     });

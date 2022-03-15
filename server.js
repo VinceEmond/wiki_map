@@ -8,6 +8,11 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 
+// cookies
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
+
 // PG database client/connection setup
 const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
@@ -33,7 +38,7 @@ app.use(express.static("public"));
 
 const usersRoutes = require("./routes/users");
 const maps = require("./routes/maps");
-
+const login = require("./routes/login");
 
 // XXXXXXXXXXXXXXXXXXXXXXXXXXX
 //          ROUTES
@@ -43,6 +48,7 @@ const maps = require("./routes/maps");
 
 app.use("/users", usersRoutes(db));
 app.use("/maps", maps(db));
+app.use("/login", login(db));
 
 // Home page
 app.get("/", (req, res) => {

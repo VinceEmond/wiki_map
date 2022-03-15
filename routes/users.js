@@ -9,6 +9,17 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
+  //this will reroute if the cookie hasn't
+  //been set (user not logged in).
+  router.use((req, res, next) => {
+    if (!req.cookies) {
+      res.redirect('/login');
+    } else if (!req.cookies.user_id) {
+      res.redirect('/login');
+    }
+    next();
+  });
+  //users GET Route
   router.get("/", (req, res) => {
     db.query(`SELECT * FROM users;`)
       .then(data => {
@@ -18,7 +29,6 @@ module.exports = (db) => {
       .catch(err => {
         res
           .status(500)
-          .json({ error: err.message });
       });
   });
   return router;
