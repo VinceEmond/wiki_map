@@ -37,11 +37,7 @@ $(document).ready(function() {
   const loadMaps = function() {
     $.ajax('/maps', { method: 'GET' })
       .then(function(mapsText) {
-<<<<<<< HEAD
-        //console.log('Success: ', mapsText);
-=======
         // console.log('Success: ', mapsText);
->>>>>>> new_map_point_coords
         renderMaps(mapsText);
       })
       .catch(err => {
