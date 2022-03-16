@@ -53,8 +53,7 @@ $('.map_points_list').on('click',function(event) {
   }
 
   if (type === 'edit') {
-    toggleForm('#pform');
-    toggleForm('#update-pform');
+    toggleForm('#update-pform', '#pform');
     $('.new_pin').slideToggle();
     hideFolders('.new_pin');
     removeFolderSpace('.folder:nth-of-type(7)');
@@ -64,8 +63,7 @@ $('.map_points_list').on('click',function(event) {
 
 $('#cancel-psubmit').on('click', function(event) {
   event.preventDefault();
-  toggleForm('#pform');
-  toggleForm('#update-pform');
+  toggleForm('#pform', '#update-pform');
 });
 
 
