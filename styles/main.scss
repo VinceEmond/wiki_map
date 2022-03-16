@@ -25,7 +25,7 @@ nav {
 }
 
 nav button {
-  background-color: white; /* Green */
+  background-color: white;
   border: none;
   color: black;
   padding: 8px 16px;
@@ -138,11 +138,43 @@ nav button:hover {
 }
 
 .map_point_element_wrapper {
-  border: 1px solid red;
+  margin-bottom: 10px;
+  padding: 8px;
+  border-radius: 5px;
+  background-color: rgb(235, 235, 235);
 }
 
 .map_point_element_wrapper button {
-  float: right;
+  background-color: white;
+  border: none;
+  color: black;
+  padding: 4px 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 25px;
+}
+
+.map_point_element_wrapper button:nth-of-type(1):hover {
+  cursor: pointer;
+  background-color: rgba(21, 255, 0, 0.4);
+}
+
+.map_point_element_wrapper button:nth-of-type(2):hover {
+  cursor: pointer;
+  background-color: rgba(255, 0, 0, 0.4);
+}
+
+// applies to 'edit' button in pins folder
+.map_point_element_wrapper button:nth-of-type(1) {
+  margin-right: 5px;
+}
+
+// applies to 'delete' button in pins folder
+.map_point_element_wrapper button:nth-of-type(2) {
+  margin-left: 5px;
 }
 
 // --------------------------
