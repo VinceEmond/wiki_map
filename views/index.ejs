@@ -50,28 +50,28 @@
       <div id="maps-collapse">
         <h2><i class="fa-solid fa-earth-americas"></i>Maps<i class="fa-solid fa-angle-down"></i></h2>
       </div>
-      <div class="maps_list hide"></div>
+      <div class="maps_list hide">&nbsp;</div>
     </div>
 
     <div class="folder push-next">
       <div id="pins-collapse">
         <h2><i class="fa-solid fa-location-dot"></i>Pins<i class="fa-solid fa-angle-down"></i></h2>
       </div>
-      <div class="map_points_list hide"></div>
+      <div class="map_points_list hide">&nbsp;</div>
     </div>
 
     <div class="folder push-next">
       <div id="fav-collapse">
         <h2><i class="fa-solid fa-star"></i>Favourites<i class="fa-solid fa-angle-down"></i></h2>
       </div>
-      <div class="favourites_list hide">Favourite Maps here...</div>
+      <div class="favourites_list hide">&nbsp;</div>
     </div>
 
     <div class="folder push-next">
       <div id="contrib-collapse">
         <h2><i class="fa-solid fa-handshake-angle"></i>Contributions<i class="fa-solid fa-angle-down"></i></h2>
       </div>
-      <div class="contributed_maps_list hide">Maps I Contributed to here...</div>
+      <div class="contributed_maps_list hide">&nbsp;</div>
     </div>
 
     <div class="folder push-next">
@@ -94,6 +94,15 @@
         <h2><i class="fa-solid fa-circle-plus"></i>New Pin<i class="fa-solid fa-angle-down"></i></h2>
       </div>
       <div class="new_pin hide">
+        <form action="" method="post">
+          <label for="ptitle">Title:</label>
+          <input type="text" id="ptitle" name="ptitle"><br><br>
+          <label for="pdesc">Description:</label>
+          <input type="text" id="pdesc" name="pdesc"><br><br>
+          <label for="pimage">Image URL:</label>
+          <input type="text" id="pimage" name="pimage"><br><br>
+          <input type="submit" value="Submit" id="psubmit">
+        </form>
         <form action="" method="post">
           <label for="ptitle">Title:</label>
           <input type="text" id="ptitle" name="ptitle"><br><br>
