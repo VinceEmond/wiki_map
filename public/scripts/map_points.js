@@ -69,9 +69,10 @@ const createMapPointElement = function(mapPointData) {
   //  <a class="name" href="/map_points/${id}">${escape(name)}</a><button type="button" id="map_point_${id}_edit"> Edit </button> <form><button type="submit" id="map_point_${id}_delete"> Delete </button></form>
   const $mapPoint = $(`
     <div class="map_point_element_wrapper">
-
-      <a class="name" href="/map_points/${id}">${escape(name)}</a><button type="button" id="map_point_${id}_edit"> Edit </button> <form action="/map_points/${id}/delete" method="POST"><button type="submit" id="map_point_${id}_delete"> Delete </button></form>
+      <a class="name" href="/map_points/${id}">${escape(name)}</a>
       <p>${escape(description)}</p>
+      <button type="button" id="map_point_${id}_edit"> Edit </button>
+      <button type="submit" id="map_point_${id}_delete"> Delete </button>
     </div>
   `);
   return $mapPoint;
