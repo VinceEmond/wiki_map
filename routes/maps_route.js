@@ -1,15 +1,10 @@
 /*
- * All routes for Users are defined here
- * Since this file is loaded in server.js into api/users,
- *   these routes are mounted onto /users
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
 const express = require('express');
 const router  = express.Router();
 
-
-// GET maps/   ---   Browse all maps Limit to 10
 module.exports = (db) => {
   //this will reroute if the cookie hasn't
   //been set (user not logged in).
@@ -23,6 +18,37 @@ module.exports = (db) => {
     }
     next();
   });
+ // GET maps/contributors   ---  Get a map by Contributors
+ router.get("/contributors", (req, res) => {
+
+  db.query(`
+    SELECT * from
+      ( SELECT maps.id as id,  maps.name AS name, maps.description AS description, maps.owner_id
+        FROM maps
+        JOIN map_points ON map_points.map_id = maps.id
+        WHERE map_points.owner_id = $1 and map_points.active = true and maps.active = true
+        GROUP BY maps.id
+        UNION
+        SELECT maps.id as id,  maps.name AS name, maps.description AS description, maps.owner_id
+        FROM maps
+        WHERE maps.owner_id = $1
+        AND maps.active = true
+      ) contrib
+    ORDER BY id
+    LIMIT 15;`, [req.cookies.user_id]
+  )
+    .then(data => {
+      const maps = data.rows;
+      res.json({ maps });
+    })
+    .catch(err => {
+      console.log("error:", err.message)
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+});
+  // GET maps/   ---   Browse all maps Limit to 10
   router.get("/", (req, res) => {
 
     db.query(`
@@ -42,6 +68,7 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+  // GET maps/:id   ---  Get a map by id
   router.get("/:id", (req, res) => {
 
     db.query(`
@@ -61,6 +88,7 @@ module.exports = (db) => {
       });
   });
 
+  // POST maps/   ---  Save a new map
   router.post("/", (req, res) => {
     const str = `
     INSERT INTO maps (owner_id, name, description, coord_x, coord_y, zoom) VALUES

@@ -16,16 +16,23 @@
     JOIN users ON users.id = map_points.owner_id
     WHERE users.name = 'JohnFrank';
 
--- Get all maps contributed by one user (via username)
--- NOTE: This does not include maps created by user
-    SELECT users.name AS user_name, maps.name AS map_name
-    FROM maps
-    JOIN map_points ON map_points.map_id = maps.id
-    JOIN users ON users.id = map_points.owner_id
-    WHERE users.name = 'JohnFrank'
-    GROUP BY users.name, maps.name;
+-- Get all maps contributed to by one user (via user_id)
+-- NOTE: This includes maps created by user
+    SELECT * from
+    ( SELECT maps.id as id,  maps.name AS name, maps.description AS description, maps.owner_id
+      FROM maps
+      JOIN map_points ON map_points.map_id = maps.id
+      WHERE map_points.owner_id = 1 and map_points.active = true and maps.active = true
+      GROUP BY maps.id
+      UNION
+      SELECT maps.id as id,  maps.name AS name, maps.description AS description, maps.owner_id
+      FROM maps
+      WHERE maps.owner_id = 1
+      AND maps.active = true
+    ) contrib
+    ORDER BY id;
 
--- Get all maps favourited by one user (via username)
+-- Get all maps favourited by one user (  via username)
     SELECT users.name AS user_name, maps.name AS fav_map
     FROM favourite_maps
     JOIN users ON users.id = favourite_maps.user_id
