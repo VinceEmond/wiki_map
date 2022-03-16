@@ -132,6 +132,9 @@ $newMapPoint.submit(function(event) {
   event.preventDefault();
   // console.log('newPinLat', newPinLat, 'newPinLng', newPinLng);
   // const currentMapId = 1;
+  // owner_id: document.cookie.split('=')[1]
+
+  // console.log("Current Owner id:", document.cookie.split('=')[1]);
 
   const dataForCall = {
     map_id: currentMapId,

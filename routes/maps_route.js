@@ -14,6 +14,7 @@ module.exports = (db) => {
   //this will reroute if the cookie hasn't
   //been set (user not logged in).
   router.use((req, res, next) => {
+    console.log("I hit the cookie checker in the maps js");
     if (!req.cookies) {
       res.redirect('/login');
       return;
@@ -36,7 +37,7 @@ module.exports = (db) => {
         res.json({ maps });
       })
       .catch(err => {
-        console.log("error:", err.message)
+        console.log("error:", err.message);
         res
           .status(500)
           .json({ error: err.message });

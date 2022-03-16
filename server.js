@@ -57,6 +57,15 @@ app.use("/login", login(db));
 
 // Home page
 app.get("/", (req, res) => {
+
+  if (!req.cookies) {
+    res.redirect('/login');
+    return;
+  } else if (!req.cookies.user_id) {
+    res.redirect('/login');
+    return;
+  }
+
   res.render("index");
 });
 
