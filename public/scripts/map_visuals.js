@@ -2,6 +2,7 @@ let map;
 let newPinLng;
 let newPinLat;
 
+
 // Place new pin on the map at lat, lng
 const generatePin = function(lat, lng, img, name, desc) {
   marker = L.marker([lat, lng]).addTo(map);
