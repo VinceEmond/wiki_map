@@ -25,13 +25,13 @@ $(() => {
 
   // Create element for Single Map point
   const createMapPointElement = function(mapPointData) {
-    const {name, description} = mapPointData;
+    const {name, description, id} = mapPointData;
 
     const $mapPoint = $(`
       <div class="map_point_element_wrapper">
-        <p class="name">${escape(name)}</p>
+        <a class="name" href="/map_points/${id}">${escape(name)}</a><button type="button" id="map_point_${id}_edit"> Edit </button><button type="button" id="map_point_${id}_delete"> Delete </button>
         <p>${escape(description)}</p>
-      </d>
+      </div>
     `);
     return $mapPoint;
   };

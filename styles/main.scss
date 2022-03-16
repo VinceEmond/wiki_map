@@ -128,13 +128,13 @@ nav button:hover {
   float: right;
 }
 
-.maps_list, .map_points_list, .favourites_list, .contributed_maps_list, .new_map_list, .new_pin_list {
+.maps_list, .map_points_list, .favourites_list, .contributed_maps_list, .new_map, .new_pin {
   margin-top: 40px;
   padding: 10px 10px;
   display: none;
 }
 
-.new_map_list, .new_pin_list {
+.new_map, .new_pin {
   text-align: right;
 }
 

@@ -92,13 +92,13 @@ function initMap() {
     removeFolderSpace('.folder:nth-of-type(5)');
   });
   $('#new-map-collapse').click(() => {
-    $('.new_map_list').slideToggle();
-    hideFolders('.new_map_list');
+    $('.new_map').slideToggle();
+    hideFolders('.new_map');
     removeFolderSpace('.folder:nth-of-type(6)');
   });
   $('#new-pin-collapse').click(() => {
-    $('.new_pin_list').slideToggle();
-    hideFolders('.new_pin_list');
+    $('.new_pin').slideToggle();
+    hideFolders('.new_pin');
     removeFolderSpace('.folder:nth-of-type(7)');
   });
 
@@ -124,13 +124,13 @@ function initMap() {
     removeFolderSpace('.folder:nth-of-type(5)');
   });
   $('#new-map-button').click(() => {
-    $('.new_map_list').slideToggle();
-    hideFolders('.new_map_list');
+    $('.new_map').slideToggle();
+    hideFolders('.new_map');
     removeFolderSpace('.folder:nth-of-type(6)');
   });
   $('#new-pin-button').click(() => {
-    $('.new_pin_list').slideToggle();
-    hideFolders('.new_pin_list');
+    $('.new_pin').slideToggle();
+    hideFolders('.new_pin');
     removeFolderSpace('.folder:nth-of-type(7)');
   });
 }
