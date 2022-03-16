@@ -120,7 +120,7 @@ $(document).ready(function() {
     });
 
 
-    const $form = $('.new_map_list form');
+    const $form = $('.new_map form');
     //****** ROUTE: POST maps/ ************/
     //Save new maps and recreate the sidebar list.
     $form.submit(function(event) {
