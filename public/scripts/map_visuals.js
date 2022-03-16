@@ -101,6 +101,11 @@ const removeFolderSpace = function(selector) {
   }
 };
 
+// hide form (selectors to use: '#update-pform' or '#pform')
+const toggleForm = function(selector) {
+  $(selector).toggleClass('form-hide');
+};
+
 // Collapse folder sections on click
 $('#maps-collapse').click(() => {
   $('.maps_list').slideToggle();

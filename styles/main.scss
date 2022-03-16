@@ -105,7 +105,7 @@ nav button:hover {
 }
 
 .folder {
-  max-height: 400px; //The max height a folder can be
+  max-height: 375px; //The max height a folder can be
   width: 90%;
   background-color: rgb(211, 211, 211);
   border-radius: 5px;
@@ -131,10 +131,6 @@ nav button:hover {
   margin-top: 40px;
   padding: 10px 10px;
   display: none;
-}
-
-.new_map, .new_pin {
-  text-align: right;
 }
 
 // ---------------------------------
@@ -248,6 +244,17 @@ nav button:hover {
 .map_element_wrapper button:nth-of-type(3):hover {
   cursor: pointer;
   background-color: rgba(255, 230, 0, 0.6);
+}
+
+// ---------------------------------
+// styling for the new pin forms
+// ---------------------------------
+.new_pin, .new_map {
+  text-align: right;
+}
+
+.form-hide {
+  display: none;
 }
 
 

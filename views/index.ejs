@@ -94,7 +94,7 @@
         <h2><i class="fa-solid fa-circle-plus"></i>New Pin<i class="fa-solid fa-angle-down"></i></h2>
       </div>
       <div class="new_pin hide">
-        <form action="" method="post">
+        <form action="" method="post" id="pform">
           <label for="ptitle">Title:</label>
           <input type="text" id="ptitle" name="ptitle"><br><br>
           <label for="pdesc">Description:</label>
@@ -103,14 +103,15 @@
           <input type="text" id="pimage" name="pimage"><br><br>
           <input type="submit" value="Submit" id="psubmit">
         </form>
-        <form action="" method="post">
-          <label for="ptitle">Title:</label>
-          <input type="text" id="ptitle" name="ptitle"><br><br>
-          <label for="pdesc">Description:</label>
-          <input type="text" id="pdesc" name="pdesc"><br><br>
-          <label for="pimage">Image URL:</label>
-          <input type="text" id="pimage" name="pimage"><br><br>
-          <input type="submit" value="Submit" id="psubmit">
+        <form action="" method="post" id="update-pform" class="form-hide">
+          <label for="update-ptitle">Edit Title:</label>
+          <input type="text" id="update-ptitle" name="update-ptitle"><br><br>
+          <label for="update-pdesc">Edit Description:</label>
+          <input type="text" id="update-pdesc" name="update-pdesc"><br><br>
+          <label for="update-pimage">Edit Image URL:</label>
+          <input type="text" id="update-pimage" name="update-pimage"><br><br>
+          <input type="submit" value="Update" id="update-psubmit">
+          <input type="submit" value="Cancel" id="cancel-psubmit">
         </form>
       </div>
     </div>
