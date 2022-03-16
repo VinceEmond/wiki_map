@@ -105,7 +105,7 @@ nav button:hover {
 }
 
 .folder {
-  max-height: 400px; //The max height a folder can be
+  max-height: 375px; //The max height a folder can be
   width: 90%;
   background-color: rgb(211, 211, 211);
   border-radius: 5px;
@@ -133,10 +133,9 @@ nav button:hover {
   display: none;
 }
 
-.new_map, .new_pin {
-  text-align: right;
-}
-
+// ---------------------------------
+// styling for the pins folder items
+// ---------------------------------
 .map_point_element_wrapper {
   margin-bottom: 10px;
   padding: 8px;
@@ -200,6 +199,64 @@ nav button:hover {
   font-size: 12px;
   font-weight: lighter;
 }
+
+// ---------------------------------
+// styling for the maps folder items
+// ---------------------------------
+.map_element_wrapper {
+  margin-bottom: 10px;
+  padding: 8px;
+  border-radius: 5px;
+  background-color: rgb(235, 235, 235);
+}
+
+.map_element_wrapper button {
+  background-color: white;
+  border: none;
+  color: black;
+  padding: 4px 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 25px;
+}
+
+// targets edit button
+.map_element_wrapper button:nth-of-type(1):hover {
+  cursor: pointer;
+  background-color: rgba(21, 255, 0, 0.4);
+}
+
+// targets delete button
+.map_element_wrapper button:nth-of-type(2) {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.map_element_wrapper button:nth-of-type(2):hover {
+  cursor: pointer;
+  background-color: rgba(255, 0, 0, 0.4);
+}
+
+// targets favourites button
+.map_element_wrapper button:nth-of-type(3):hover {
+  cursor: pointer;
+  background-color: rgba(255, 230, 0, 0.6);
+}
+
+// ---------------------------------
+// styling for the new pin forms
+// ---------------------------------
+.new_pin, .new_map {
+  text-align: right;
+}
+
+.form-hide {
+  display: none;
+}
+
 
 
 

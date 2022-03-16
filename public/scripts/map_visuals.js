@@ -66,10 +66,11 @@ document.getElementById("map").addEventListener("contextmenu", function(event) {
   // Prevent the browser's context menu from appearing
   event.preventDefault();
   console.log("I got your pin request!");
+  const defaultPopup = "<div class='pin-popup'><img src='../images/map_logo.png'><h1>New Pin</h1><h2>Add a description!</h2></div>";
 
   if (updatePin === false) {
     let newLatLng = new L.LatLng(lat, lng);
-    marker.bindPopup("<img src='../images/map_logo.png' width='70' height='70'><br><b> New Pin </b><br> Add a description");
+    marker.bindPopup(defaultPopup);
     marker.setLatLng(newLatLng);
     newPinLat = lat;
     newPinLng = lng;
@@ -78,7 +79,7 @@ document.getElementById("map").addEventListener("contextmenu", function(event) {
   updatePin = false;
 
   marker = L.marker([lat, lng]).addTo(map);
-  marker.bindPopup("<img src='../images/map_logo.png' width='70' height='70'><br><b> New Pin </b><br> Add a description");
+  marker.bindPopup(defaultPopup);
   newPinLat = lat;
   newPinLng = lng;
   return false; // To disable default popup.
@@ -98,6 +99,11 @@ const removeFolderSpace = function(selector) {
   if (!$(`${selector} .hide`).height() > 0) {
     $(selector).removeClass('push-next');
   }
+};
+
+// hide form (selectors to use: '#update-pform' or '#pform')
+const toggleForm = function(selector) {
+  $(selector).toggleClass('form-hide');
 };
 
 // Collapse folder sections on click
