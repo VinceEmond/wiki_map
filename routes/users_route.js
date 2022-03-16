@@ -33,5 +33,26 @@ module.exports = (db) => {
           .status(500)
       });
   });
+  //users GET Route
+  router.get("/:id", (req, res) => {
+    console.log("req.params:",req.params);
+    console.log("req.params.id:",req.params.id);
+    db.query(`
+      SELECT *
+      FROM users
+      WHERE active = true
+      AND id = $1;`
+    ,[req.params.id])
+
+      .then(data => {
+        const user = data.rows[0];
+        res.json({ user });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
   return router;
 };

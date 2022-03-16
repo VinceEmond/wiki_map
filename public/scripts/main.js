@@ -1,1 +1,2 @@
-let currentMapId = 4;
+let currentMapId = 1;
+let currentUserId = 1;

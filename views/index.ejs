@@ -20,11 +20,6 @@
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-  <script type="text/javascript" src="/scripts/main.js"></script>
-  <script type="text/javascript" src="/scripts/map_points.js"></script>
-  <script type="text/javascript" src="/scripts/maps.js"></script>
-  <script type="text/javascript" src="/scripts/map_visuals.js"></script>
-
 </head>
 
 <!-- Calling the map function here, may want to swap to jquery later ($(document).ready) -->
@@ -39,7 +34,7 @@
     <button type="button" id="contrib-button"><i class="fa-solid fa-handshake-angle"></i> Contributions</button>
     <button type="button" id="new-map-button"><i class="fa-solid fa-square-plus"></i> New Map</button>
     <button type="button" id="new-pin-button"><i class="fa-solid fa-circle-plus"></i> New Pin</button>
-    <span>Logged in as</span>
+    <span id="login_btn">Logged in as</span>
   </nav>
 
   <section id="side-bar">
@@ -127,8 +122,11 @@
 
   </section>-->
   <!-- App JS -->
-  <!--<script type="text/javascript" src="/scripts/app.js"></script> -->
-
+  <script type="text/javascript" src="/scripts/main.js"></script>
+  <script type="text/javascript" src="/scripts/login.js"></script>
+  <script type="text/javascript" src="/scripts/maps.js"></script>
+  <script type="text/javascript" src="/scripts/map_visuals.js"></script>
+  <script type="text/javascript" src="/scripts/map_points.js"></script>
 </body>
 
 </html>
