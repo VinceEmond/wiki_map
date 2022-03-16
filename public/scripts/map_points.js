@@ -29,8 +29,9 @@ $(() => {
 
     const $mapPoint = $(`
       <div class="map_point_element_wrapper">
-        <a class="name" href="/map_points/${id}">${escape(name)}</a><button type="button" id="map_point_${id}_edit"> Edit </button><button type="button" id="map_point_${id}_delete"> Delete </button>
+        <a class="name" href="/map_points/${id}">${escape(name)}</a>
         <p>${escape(description)}</p>
+        <button type="button" id="map_point_${id}_edit"> Edit </button><button type="button" id="map_point_${id}_delete"> Delete </button>
       </div>
     `);
     return $mapPoint;

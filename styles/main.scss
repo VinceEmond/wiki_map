@@ -112,7 +112,6 @@ nav button:hover {
   overflow: auto;
   position: relative;
   animation: shrinkBottom 0.5s forwards;
-  //margin-bottom: 30px;
 }
 
 // must be after '.folder' to override it
@@ -136,6 +135,14 @@ nav button:hover {
 
 .new_map, .new_pin {
   text-align: right;
+}
+
+.map_point_element_wrapper {
+  border: 1px solid red;
+}
+
+.map_point_element_wrapper button {
+  float: right;
 }
 
 
