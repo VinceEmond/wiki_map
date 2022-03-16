@@ -3,6 +3,7 @@
 
 <head>
   <title>Wiki Maps</title>
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
 
   <!-- Map API links -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
@@ -21,14 +22,14 @@
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/main.js"></script>
-  <script type="text/javascript" src="/scripts/map_points.js"></script>
+  <!-- <script type="text/javascript" src="/scripts/map_points.js"></script> -->
   <script type="text/javascript" src="/scripts/maps.js"></script>
-  <script type="text/javascript" src="/scripts/map_visuals.js"></script>
+  <!-- <script type="text/javascript" src="/scripts/map_visuals.js"></script> -->
 
 </head>
 
 <!-- Calling the map function here, may want to swap to jquery later ($(document).ready) -->
-<body onload='initMap()'>
+<body>
 
   <div id="map"></div>
 
@@ -128,7 +129,8 @@
   </section>-->
   <!-- App JS -->
   <!--<script type="text/javascript" src="/scripts/app.js"></script> -->
-
+  <script type="text/javascript" src="/scripts/map_visuals.js"></script>
+  <script type="text/javascript" src="/scripts/map_points.js"></script>
 </body>
 
 </html>
