@@ -24,24 +24,26 @@ module.exports = (db) => {
     next();
   });
   router.get("/", (req, res) => {
+
     db.query(`
       SELECT *
       FROM maps
       WHERE active = true
-      LIMIT 10;`
+      LIMIT 15;`
     )
       .then(data => {
         const maps = data.rows;
         res.json({ maps });
       })
       .catch(err => {
+        console.log("error:", err.message)
         res
           .status(500)
           .json({ error: err.message });
       });
   });
   router.get("/:id", (req, res) => {
-    console.log("map_id:",req.params.id);
+
     db.query(`
       SELECT *
       FROM maps
@@ -58,8 +60,8 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
-  router.post("/", (req, res) => {
 
+  router.post("/", (req, res) => {
     const str = `
     INSERT INTO maps (owner_id, name, description, coord_x, coord_y, zoom) VALUES
     ($1,
@@ -71,10 +73,11 @@ module.exports = (db) => {
     const { owner_id, name, desc, mapCoordX, mapCoordY, zoom } = req.body;
 
     const queryParams = [owner_id, name, desc, mapCoordX, mapCoordY, zoom];
-
+    console.log("queryParams:",queryParams);
     return db.query(str, queryParams)
       .then(result => {
-        res.json({ maps: result.rows[0] });
+        console.log("maps.results",result.rows[0]);
+        res.json({ map: result.rows[0] });
       })
       .catch(err => {
         console.log("err:", err.message);
