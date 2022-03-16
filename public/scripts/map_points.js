@@ -9,7 +9,7 @@
 /****************************/
 /*        VARIABLES         */
 /****************************/
-const $newMapPoint = $('.new_pin_list form');
+const $newMapPoint = $('.new_pin form');
 const $deleteMapPoint = $('#REPLACE-ME-WITH-A-TAG');
 
 

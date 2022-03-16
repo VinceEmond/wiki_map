@@ -8,13 +8,13 @@ let updatePin = true;
 
 const mapStartingLat = 49.285395314699244;
 const mapStartingLng = -123.12673661801905;
-const mapSartingZoom = 13;
+const mapStartingZoom = 13;
 
 // Place new pin on the map at lat, lng
 const generatePin = function(lat, lng, img, name, desc) {
   const marker = L.marker([lat, lng]);
   marker.addTo(map);
-  marker.bindPopup(`<img src='${img}' width='70' height='70'><br><b>${name}</b><br>${desc}`);
+  marker.bindPopup(`<div class='pin-popup'><img src='${img}'><h1>${name}</h1><h2>${desc}</h2></div>`);
 };
 
 const reloadMap = function() {
@@ -41,7 +41,7 @@ const setView = function(lat, lng, zoom) {
 const initMap = function() {
 
   // map = L.map('map').setView([mapViewLat, mapViewlng], zoom);
-  map = L.map('map').setView([mapStartingLat, mapStartingLng], mapSartingZoom);
+  map = L.map('map').setView([mapStartingLat, mapStartingLng], mapStartingZoom);
 
   const mapLayer = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXRoYW5sb2V3ZW4iLCJhIjoiY2wwb2JhamMwMWl5bDNsbmVuczI2aXBrZyJ9.tfw9ypNjnVAzLUqlUTNZ4g', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -59,7 +59,6 @@ const initMap = function() {
     lat = ev.latlng.lat;
     lng = ev.latlng.lng;
   });
-
 };
 
 
@@ -123,13 +122,13 @@ $('#contrib-collapse').click(() => {
   removeFolderSpace('.folder:nth-of-type(5)');
 });
 $('#new-map-collapse').click(() => {
-  $('.new_map_list').slideToggle();
-  hideFolders('.new_map_list');
+  $('.new_map').slideToggle();
+  hideFolders('.new_map');
   removeFolderSpace('.folder:nth-of-type(6)');
 });
 $('#new-pin-collapse').click(() => {
-  $('.new_pin_list').slideToggle();
-  hideFolders('.new_pin_list');
+  $('.new_pin').slideToggle();
+  hideFolders('.new_pin');
   removeFolderSpace('.folder:nth-of-type(7)');
 });
 
@@ -155,14 +154,15 @@ $('#contrib-button').click(() => {
   removeFolderSpace('.folder:nth-of-type(5)');
 });
 $('#new-map-button').click(() => {
-  $('.new_map_list').slideToggle();
-  hideFolders('.new_map_list');
+  $('.new_map').slideToggle();
+  hideFolders('.new_map');
   removeFolderSpace('.folder:nth-of-type(6)');
 });
 $('#new-pin-button').click(() => {
-  $('.new_pin_list').slideToggle();
-  hideFolders('.new_pin_list');
+  $('.new_pin').slideToggle();
+  hideFolders('.new_pin');
   removeFolderSpace('.folder:nth-of-type(7)');
 });
+
 
 initMap();
