@@ -3,6 +3,7 @@
 
 <head>
   <title>Wiki Maps</title>
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
 
   <!-- Map API links -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
@@ -21,14 +22,12 @@
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/main.js"></script>
-  <script type="text/javascript" src="/scripts/map_points.js"></script>
   <script type="text/javascript" src="/scripts/maps.js"></script>
-  <script type="text/javascript" src="/scripts/map_visuals.js"></script>
 
 </head>
 
 <!-- Calling the map function here, may want to swap to jquery later ($(document).ready) -->
-<body onload='initMap()'>
+<body>
 
   <div id="map"></div>
 
@@ -54,14 +53,14 @@
       <div id="maps-collapse">
         <h2><i class="fa-solid fa-earth-americas"></i>Maps<i class="fa-solid fa-angle-down"></i></h2>
       </div>
-      <div class="maps_list hide"> Maps here...</div>
+      <div class="maps_list hide"></div>
     </div>
 
     <div class="folder push-next">
       <div id="pins-collapse">
         <h2><i class="fa-solid fa-location-dot"></i>Pins<i class="fa-solid fa-angle-down"></i></h2>
       </div>
-      <div class="map_points_list hide">Maps Points here...</div>
+      <div class="map_points_list hide"></div>
     </div>
 
     <div class="folder push-next">
@@ -111,6 +110,8 @@
     </div>
   </section>
 
+  <script type="text/javascript" src="/scripts/map_visuals.js"></script>
+  <script type="text/javascript" src="/scripts/map_points.js"></script>
 </body>
 
 </html>
