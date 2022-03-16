@@ -37,7 +37,7 @@ $(document).ready(function() {
   const loadMaps = function() {
     $.ajax('/maps', { method: 'GET' })
       .then(function(mapsText) {
-        //console.log('Success: ', mapsText);
+        // console.log('Success: ', mapsText);
         renderMaps(mapsText);
       })
       .catch(err => {

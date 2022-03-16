@@ -78,8 +78,8 @@ module.exports = (db) => {
 
     db.query(queryStr,queryParams)
       .then(response => {
-        const mapPoints = response.rows;
-        res.json({ mapPoints });
+        const mapPoint = response.rows[0];
+        res.json({ mapPoint });
       })
       .catch(err => {
         res
@@ -125,8 +125,9 @@ module.exports = (db) => {
   // POST map_points/:id/delete   ---   Read details for an existing map_point
   router.post('/:id/delete', (req, res) => {
 
-    const map_point_id = 1;
-    const map_id = 1;
+    const map_point_id = req.body.map_point_id;
+    const map_id = req.body.map_id;
+
 
     const queryStr = `
     UPDATE map_points
