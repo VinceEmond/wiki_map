@@ -107,6 +107,16 @@ const toggleForm = function(selector1, selector2) {
   $(selector2).addClass('form-hide');
 };
 
+const showEditPinTitle = function() {
+  $('#new-pin-collapse h2:nth-of-type(2)').removeClass('form-hide');
+  $('#new-pin-collapse h2:nth-of-type(1)').addClass('form-hide');
+};
+
+const showNewPinTitle = function() {
+  $('#new-pin-collapse h2:nth-of-type(1)').removeClass('form-hide');
+  $('#new-pin-collapse h2:nth-of-type(2)').addClass('form-hide');
+};
+
 // Collapse folder sections on click
 $('#maps-collapse').click(() => {
   $('.maps_list').slideToggle();
