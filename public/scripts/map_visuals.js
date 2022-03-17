@@ -100,9 +100,20 @@ const removeFolderSpace = function(selector) {
   }
 };
 
-// hide form (selectors to use: '#update-pform' or '#pform')
-const toggleForm = function(selector) {
-  $(selector).toggleClass('form-hide');
+// Show selector1 and hide selector 2
+const toggleForm = function(selector1, selector2) {
+  $(selector1).removeClass('form-hide');
+  $(selector2).addClass('form-hide');
+};
+
+const showEditPinTitle = function() {
+  $('#new-pin-collapse h2:nth-of-type(2)').removeClass('form-hide');
+  $('#new-pin-collapse h2:nth-of-type(1)').addClass('form-hide');
+};
+
+const showNewPinTitle = function() {
+  $('#new-pin-collapse h2:nth-of-type(1)').removeClass('form-hide');
+  $('#new-pin-collapse h2:nth-of-type(2)').addClass('form-hide');
 };
 
 // Collapse folder sections on click

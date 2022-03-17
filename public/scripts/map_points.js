@@ -134,8 +134,8 @@ $mapPointsList.on('click',function(event) {
         console.log("Error :", err);
       });
 
-    toggleForm('#pform');
-    toggleForm('#update-pform');
+    toggleForm('#update-pform', '#pform');
+    showEditPinTitle();
     $('.new_pin').slideToggle();
     hideFolders('.new_pin');
     removeFolderSpace('.folder:nth-of-type(7)');
@@ -143,11 +143,12 @@ $mapPointsList.on('click',function(event) {
 
 });
 
+
 // Listen for cancel button on map_points update form
 $updateMapPointCancelBtn.on('click', function(event) {
   event.preventDefault();
-  toggleForm('#pform');
-  toggleForm('#update-pform');
+  toggleForm('#pform', '#update-pform');
+  showNewPinTitle();
 });
 
 // List for update button on map_points update form
