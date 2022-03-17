@@ -40,7 +40,8 @@ const usersRoutes = require("./routes/users_route");
 const maps = require("./routes/maps_route");
 const mapPoints = require("./routes/map_points_route");
 const login = require("./routes/login_route");
-const contributor = require("./routes/contributors_route");
+const contributors = require("./routes/contributors_route");
+const favourites = require("./routes/favourites_route");
 
 // XXXXXXXXXXXXXXXXXXXXXXXXXXX
 //          ROUTES
@@ -55,7 +56,8 @@ app.use("/users", usersRoutes(db));
 app.use(`/map_points`, mapPoints(db));
 app.use("/maps", maps(db));
 app.use("/login", login(db));
-app.use("/contributors", contributor(db));
+app.use("/contributors", contributors(db));
+app.use("/favourites", favourites(db));
 
 // Home page
 app.get("/", (req, res) => {

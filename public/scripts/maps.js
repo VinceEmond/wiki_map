@@ -157,6 +157,7 @@ const getMap = function(mapId) {
         loadMapPoints();
         loadMaps();
         loadContributorMaps();
+        loadFavouritesMaps();
       });
       // Callback handler that will be called on failure
       request.fail(function(jqXHR, status, error) {

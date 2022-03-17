@@ -32,12 +32,11 @@
     ) contrib
     ORDER BY id;
 
--- Get all maps favourited by one user (  via username)
-    SELECT users.name AS user_name, maps.name AS fav_map
+-- Get all maps favourited by one user (  via user_id)
+    SELECT maps.id as id,  maps.name AS name, maps.description AS description, maps.owner_id
     FROM favourite_maps
-    JOIN users ON users.id = favourite_maps.user_id
     JOIN maps ON maps.id = favourite_maps.map_id
-    WHERE users.name = 'JohnFrank';
+    WHERE favourite_maps.user_id = 1;
 
 
 
