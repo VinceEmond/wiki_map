@@ -10,63 +10,22 @@
 /*        VARIABLES         */
 /****************************/
 const $newMapPoint = $('.new_pin form');
-const $deleteMapPoint = $('#REPLACE-ME-WITH-A-TAG');
+const $mapPointsList = $('.map_points_list');
+const $newMapPointTitleInput = $("#ptitle");
+const $newMapPointUrlInput = $("#pimage");
+const $newMapPointDescInput = $("#pdesc");
+const $updateMapPointSubmitBtn = $('#update-psubmit');
+const $updateMapPointCancelBtn = $('#cancel-psubmit');
+const $updateMapPointTitleInput = $('#update-ptitle');
+const $updateMapPointDescInput = $('#update-pdesc');
+const $updateMapPointURLInput = $('#update-pimage');
+
+let idOfMapPointToUpdate;
 
 
 /****************************/
 /*        FUNCTIONS         */
 /****************************/
-
-
-
-$('.map_points_list').on('click',function(event) {
-  event.preventDefault();
-
-  // console.log("map", map);
-  // map.removeLayer(marker);
-  // marker.clearLayer();
-  // map.remove();
-  // initMap();
-  // console.log("Map layers:", map.layers);
-  // console.log("Does it have layers?:", map.hasLayer());
-  // map.removeLayer(this);
-  // console.log("Map Point ID:",event.target.id.split('_')[2]);
-  // console.log("Edit or Delete?:",event.target.id.split('_')[3]);
-
-  const type = event.target.id.split('_')[3];
-  const mapPointId = event.target.id.split('_')[2];
-
-  if (type === 'delete') {
-    const dataForCall = {
-      map_id: currentMapId,
-      map_point_id: mapPointId
-    };
-
-    $.ajax({ url: `map_points/${mapPointId}/delete`, method: "POST", data: dataForCall})
-      .then((response, status) => {
-        console.log(`Map ID ${currentMapId}'s map_point ${mapPointId} has been made inactive.`);
-        reloadMap();
-      })
-      .catch((err) => {
-        console.log("Error :", err);
-      });
-  }
-
-  if (type === 'edit') {
-    toggleForm('#pform');
-    toggleForm('#update-pform');
-    $('.new_pin').slideToggle();
-    hideFolders('.new_pin');
-    removeFolderSpace('.folder:nth-of-type(7)');
-  }
-
-});
-
-$('#cancel-psubmit').on('click', function(event) {
-  event.preventDefault();
-  toggleForm('#pform');
-  toggleForm('#update-pform');
-});
 
 
 const escape = function(str) {
@@ -75,12 +34,10 @@ const escape = function(str) {
   return div.innerHTML;
 };
 
-// Create element for Single Map point
+// Create HTML element for a Single Map Point List Item
 const createMapPointElement = function(mapPointData) {
   const {name, description, id} = mapPointData;
 
-  // <a class="name" href="/map_points/${id}">${escape(name)}</a><button type="button" id="map_point_${id}_edit"> Edit </button> <form action="/map_points/${id}/delete" method="POST"><button type="submit" id="map_point_${id}_delete"> Delete </button></form>
-  //  <a class="name" href="/map_points/${id}">${escape(name)}</a><button type="button" id="map_point_${id}_edit"> Edit </button> <form><button type="submit" id="map_point_${id}_delete"> Delete </button></form>
   const $mapPoint = $(`
     <div class="map_point_element_wrapper">
       <a class="name" href="/map_points/${id}">${escape(name)}</a>
@@ -92,33 +49,43 @@ const createMapPointElement = function(mapPointData) {
   return $mapPoint;
 };
 
-// Loops through all Map_points and appends to .ejs template
-const renderMapPointsList = function(dataObj) {
-  const mapPointsArr = dataObj.mapPoints;
-  for (let mapPoint of mapPointsArr) {
-    const $mapPoint = createMapPointElement(mapPoint);
-    $('.map_points_list').prepend($mapPoint);
+// Loops through all Map_points, and appends to map_point list
+const renderMapPointsList = function(mapPointsArr) {
+  for (const mapPoint of mapPointsArr) {
+    $mapPointsList.prepend(createMapPointElement(mapPoint));
     generatePin(mapPoint.coord_x, mapPoint.coord_y, mapPoint.image, mapPoint.name, mapPoint.description);
   }
   return;
 };
 
 const loadMapPoints = function() {
-  const queryObj = {
-    // set the current map
+  const dataForCall = {
     map_id: currentMapId
   };
 
-  $.ajax({url: "/map_points", method: 'GET', data: queryObj})
-    .then((mapPointsObj) => {
-      // Clears entire div of all existing map_points
+  $.ajax({url: "/map_points", method: 'GET', data: dataForCall})
+    .then((response) => {
+      const mapPointsArr = response.mapPoints;
+      // Clear all existing map_points in the list
       $(".map_point_element_wrapper").remove();
-      // Render Map points with object returned from database
-      renderMapPointsList(mapPointsObj);
+      // Render Map points in list and on map using data from database
+      renderMapPointsList(mapPointsArr);
     })
     .catch(err => {
-      // console.log('Load Map Points Error', err);
+      console.log(err);
     });
+};
+
+const clearNewMapPointFormInputs = function() {
+  $newMapPointTitleInput.val('');
+  $newMapPointDescInput.val('');
+  $newMapPointUrlInput.val('');
+};
+
+const clearUpdateMapPointFormInputs = function() {
+  $updateMapPointTitleInput.val('');
+  $updateMapPointDescInput.val('');
+  $updateMapPointURLInput.val('');
 };
 
 
@@ -126,17 +93,90 @@ const loadMapPoints = function() {
 /*      EVENT LISTENERS     */
 /****************************/
 
+
+// Listen for EDIT or DELETE buttons in map_points list
+$mapPointsList.on('click',function(event) {
+  event.preventDefault();
+
+  const type = event.target.id.split('_')[3];
+  const mapPointId = event.target.id.split('_')[2];
+
+  // If DELETE button is pressed for a map_point
+  if (type === 'delete') {
+    const dataForCall = {
+      map_id: currentMapId,
+      map_point_id: mapPointId
+    };
+
+    $.ajax({ url: `map_points/${mapPointId}/delete`, method: "POST", data: dataForCall})
+      .then((response, status) => {
+        // console.log(`Map ID ${currentMapId}'s map_point ${mapPointId} has been made inactive.`);
+        reloadMap();
+      })
+      .catch((err) => {
+        console.log("Error :", err);
+      });
+  }
+
+  // If EDIT button is pressed for a map_point
+  if (type === 'edit') {
+
+    $.ajax({ url: `map_points/${mapPointId}`, method: "GET"})
+      .then((response) => {
+        const {name, description, image, id} = response.mapPoint;
+        idOfMapPointToUpdate = id;
+        // Populate text boxes with existing values from db
+        $updateMapPointTitleInput.val(name);
+        $updateMapPointDescInput.val(description);
+        $updateMapPointURLInput.val(image);
+      })
+      .catch((err) => {
+        console.log("Error :", err);
+      });
+
+    toggleForm('#pform');
+    toggleForm('#update-pform');
+    $('.new_pin').slideToggle();
+    hideFolders('.new_pin');
+    removeFolderSpace('.folder:nth-of-type(7)');
+  }
+
+});
+
+// Listen for cancel button on map_points update form
+$updateMapPointCancelBtn.on('click', function(event) {
+  event.preventDefault();
+  toggleForm('#pform');
+  toggleForm('#update-pform');
+});
+
+// List for update button on map_points update form
+$updateMapPointSubmitBtn.on('click', function(event) {
+  event.preventDefault();
+  // console.log("Update button clicked! ID of map point to update:", idOfMapPointToUpdate);
+
+  const dataForCall = {
+    name: $updateMapPointTitleInput.val(),
+    description: $updateMapPointDescInput.val(),
+    image: $updateMapPointURLInput.val()
+  };
+
+  $.ajax({url: `map_points/${idOfMapPointToUpdate}`, method: "POST", data: dataForCall})
+    .then((response) => {
+      console.log("The response with point", response.mapPoint);
+      clearUpdateMapPointFormInputs();
+      reloadMap();
+    })
+    .catch((err) => {
+      console.log("Error Status:", err.status);
+      console.log("Error Status Text:", err.statusText);
+    });
+});
+
+// Listen for the favourite button to be clicked
 $('#fav-button').on('click', function(event) {
   event.preventDefault();
   console.log("Fav Button clicked!");
-
-  $.ajax({ url: "/map_points/1", method: "GET"})
-    .then((response, status) => {
-      console.log("Response:", response.mapPoint);
-    })
-    .catch((err) => {
-      console.log("Error :", console.err.message);
-    });
 
 });
 
@@ -144,56 +184,37 @@ $('#fav-button').on('click', function(event) {
 // Create a new map_point
 $newMapPoint.submit(function(event) {
   event.preventDefault();
-  // console.log('newPinLat', newPinLat, 'newPinLng', newPinLng);
-  // const currentMapId = 1;
-  // owner_id: document.cookie.split('=')[1]
 
-  // console.log("Current Owner id:", document.cookie.split('=')[1]);
+  const userIDFromCookie = document.cookie.split('=')[1];
+  let newMapPointUrlInput = $newMapPointUrlInput.val();
+
+  // If image URL input box is empty, set a default map pin image
+  if (!newMapPointUrlInput) {
+    newMapPointUrlInput = defaultNewPinImageURL;
+  }
 
   const dataForCall = {
     map_id: currentMapId,
-    owner_id: 3,
-    name: $("#ptitle").val(),
-    description: $("#pdesc").val(),
+    owner_id: userIDFromCookie,
+    name: $newMapPointTitleInput.val(),
+    description: $newMapPointDescInput.val(),
     coord_x: newPinLat,
     coord_y: newPinLng,
     zoom: 16,
-    image: '../images/map_logo.png'
+    image: newMapPointUrlInput
   };
 
   $.ajax({ url: "/map_points", method: "POST", data: dataForCall})
     .then((response, status) =>  {
-      console.log(`Created a new map point on map_id ${currentMapId}. The new map_point's ID is: `, response.newMapPoint.id);
-      $("#ptitle").val('');
-      $("#pdesc").val('');
+      // console.log(`Created a new map point on map_id ${currentMapId}. The new map_point's ID is: `, response.newMapPoint.id);
+      clearNewMapPointFormInputs();
       reloadMap();
-    })
-    .catch((err) => {
-      console.log("Error :", console.err.message);
-    });
-});
-
-// Delete an existing map_point
-$deleteMapPoint.on('click',function(event) {
-  event.preventDefault();
-
-  // const currentMapId = 1;
-  const currentMapPointId = 1;
-
-  const dataForCall = {
-    map_id: currentMapId,
-    map_point_id: currentMapPointId
-  };
-
-  $.ajax({ url: `map_points/${currentMapPointId}/delete`, method: "POST", data: dataForCall})
-    .then((response, status) => {
-      console.log(`Map ID ${currentMapId}'s map_point ${currentMapPointId} has been made inactive.`);
-      loadMapPoints();
     })
     .catch((err) => {
       console.log("Error :", err.message);
     });
 });
+
 
 
 

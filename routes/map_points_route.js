@@ -60,8 +60,8 @@ module.exports = (db) => {
     // console.log('Req Params', req.params);
 
     const {id} = req.params;
-    const map_id = 1;  //  SEE LARGE NOTE BELLOW
-    const queryParams = [id, map_id];
+    // const map_id = 1;  //  SEE LARGE NOTE BELLOW
+    const queryParams = [id];
 
     /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
     /*  NOTE: Currently hardcoded to only show map_points for one map
@@ -74,11 +74,40 @@ module.exports = (db) => {
       SELECT *
       FROM map_points
       WHERE map_points.id = $1
-      AND map_id = $2;`;
+      `;
 
     db.query(queryStr,queryParams)
       .then(response => {
         const mapPoint = response.rows[0];
+        res.json({ mapPoint });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
+  //POST map_points/:id   ---   Edit details for an existing map_point
+  router.post("/:id", (req,res) => {
+    const {id} = req.params;
+    const {name, description, image} = req.body;
+    const queryParams = [name, description, image, id];
+
+    // console.log("Query Params", queryParams);
+    const queryStr = `
+    UPDATE map_points
+      SET name = $1,
+      description = $2,
+      image = $3
+      WHERE map_points.id = $4
+      RETURNING *;
+    `;
+
+    db.query(queryStr, queryParams)
+      .then(response => {
+        const mapPoint = response.rows[0];
+        // console.log("Returned updated map point", response.rows[0]);
         res.json({ mapPoint });
       })
       .catch(err => {
@@ -106,13 +135,13 @@ module.exports = (db) => {
       INSERT INTO map_points (map_id, owner_id, name, coord_x, coord_y, zoom, description, image) VALUES (
         $1, $2, $3, $4, $5, $6, $7, $8
       )
-      returning *;`;
+      RETURNING *;`;
 
     const queryParams = [map_id, owner_id, name, coord_x, coord_y, zoom, description, image];
 
     db.query(queryStr, queryParams)
       .then(response => {
-        const mapPoints = response.rows;
+        // const mapPoints = response.rows;
         res.json({ newMapPoint: response.rows[0]});
       })
       .catch(err => {
@@ -122,7 +151,7 @@ module.exports = (db) => {
       });
   });
 
-  // POST map_points/:id/delete   ---   Read details for an existing map_point
+  // POST map_points/:id/delete   ---   Delete an existing map_point
   router.post('/:id/delete', (req, res) => {
 
     const map_point_id = req.body.map_point_id;
