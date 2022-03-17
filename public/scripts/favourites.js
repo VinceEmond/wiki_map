@@ -1,10 +1,10 @@
-$(document).ready(function() {
+//$(document).ready(function() {
   //this escapes the content
-  const escape = function(str) {
-    let div = document.createElement("div");
-    div.appendChild(document.createTextNode(str));
-    return div.innerHTML;
-  };
+  // const escape = function(str) {
+  //   let div = document.createElement("div");
+  //   div.appendChild(document.createTextNode(str));
+  //   return div.innerHTML;
+  // };
 
   //********* Favourites Map List Render Functions **********/
   //this creates the HTML for a single map item
@@ -91,4 +91,4 @@ $(document).ready(function() {
   });
 
   loadFavouritesMaps();
-});
+//});

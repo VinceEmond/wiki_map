@@ -49,24 +49,31 @@ $(document).ready(function() {
         console.log("error:", err.message);
       });
   };
+
+  const addToFavourites = function (mapId, userId) {
+    const queryObj = { map_id: mapId, user_id: userId };
+    $.ajax('/favourites/new', { method: 'POST', data: queryObj})
+    .then(function(mapsText) {
+      loadFavouritesMaps();
+    })
+    .catch(err => {
+      console.log("error:", err.message);
+    });
+  }
+  const deleteMap = function (mapId, userId) {
+    const queryObj = { map_id: mapId, user_id: userId };
+    $.ajax('/maps/' + mapId + '/delete', { method: 'POST', data: queryObj})
+    .then(function(mapsText) {
+      loadMaps();
+      loadFavouritesMaps();
+      loadContributorMaps();
+    })
+    .catch(err => {
+      console.log("error:", err.message);
+    });
+  }
 //*********** End Map List Render Functions ***********/
 
-  const mapDataIsValid = function(textString) {
-
-    // if (!textString) {
-    //   $("#error-msg").text("Error: The tweet contains no message.");
-    //   $("#error-msg").slideDown();
-    //   return false;
-    // }
-    //   if (textString.length > 140) {
-
-  //   $("#error-msg").text("Error: The tweet message is too long.");
-  //   $("#error-msg").slideDown();
-  //   return false;
-  // }
-  // $("#error-msg").hide();
-  // return true;
-  };
 const getMap = function(mapId) {
   let queryObj = {
         id: mapId
@@ -114,7 +121,17 @@ const getMap = function(mapId) {
 
     $('.maps_list').on('click', function(event) {
       event.preventDefault();
-      getMap(event.target.id);
+      if (event.target.nodeName==='A'){
+        getMap(event.target.id);
+      }
+      else if (event.target.nodeName==='BUTTON') {
+        if (event.target.id.split('_')[0] === 'delete'){
+          deleteMap(event.target.id.split('_')[1], document.cookie.split('=')[1])
+        }
+        if (event.target.id.split('_')[0] === 'favourite'){
+          addToFavourites(event.target.id.split('_')[1], document.cookie.split('=')[1])
+        }
+      }
     });
 
     $('.contributed_maps_list').on('click', function(event) {
