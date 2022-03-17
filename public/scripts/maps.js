@@ -8,6 +8,8 @@
 //   zoom: 'zoom'
 // };
 
+const startingMapName = "Vancouver Coffee Shops";
+
 $(document).ready(function() {
   //this escapes the content
   const escape = function(str) {
@@ -17,7 +19,7 @@ $(document).ready(function() {
   };
   //this creates the HTML for a single map item
   const createMapElement = function(mapData) {
-// href="/maps/${escape(mapData.id)}""
+    // href="/maps/${escape(mapData.id)}""
     const $map = $(`
       <div class="map_element_wrapper">
         <p class="map_name"><a id="${escape(mapData.id)}" href="#">${escape(mapData.name)}</a></p>
@@ -169,5 +171,6 @@ $(document).ready(function() {
 
   });
   //the map list gets rendered the first time.
+  $("#map-name").text(startingMapName);
   loadMaps();
 });
