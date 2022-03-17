@@ -52,6 +52,22 @@ $('.map_points_list').on('click',function(event) {
       });
   }
 
+  if (type === 'edit') {
+    toggleForm('#update-pform', '#pform');
+    showEditPinTitle();
+
+    // swap to new pin folder
+    $('.new_pin').slideToggle();
+    hideFolders('.new_pin');
+    removeFolderSpace('.folder:nth-of-type(7)');
+  }
+
+});
+
+$('#cancel-psubmit').on('click', function(event) {
+  event.preventDefault();
+  toggleForm('#pform', '#update-pform');
+  showNewPinTitle();
 });
 
 

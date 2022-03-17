@@ -66,10 +66,11 @@ document.getElementById("map").addEventListener("contextmenu", function(event) {
   // Prevent the browser's context menu from appearing
   event.preventDefault();
   console.log("I got your pin request!");
+  const defaultPopup = "<div class='pin-popup'><img src='../images/map_logo.png'><h1>New Pin</h1><h2>Add a description!</h2></div>";
 
   if (updatePin === false) {
     let newLatLng = new L.LatLng(lat, lng);
-    marker.bindPopup("<img src='../images/map_logo.png' width='70' height='70'><br><b> New Pin </b><br> Add a description");
+    marker.bindPopup(defaultPopup);
     marker.setLatLng(newLatLng);
     newPinLat = lat;
     newPinLng = lng;
@@ -78,7 +79,7 @@ document.getElementById("map").addEventListener("contextmenu", function(event) {
   updatePin = false;
 
   marker = L.marker([lat, lng]).addTo(map);
-  marker.bindPopup("<img src='../images/map_logo.png' width='70' height='70'><br><b> New Pin </b><br> Add a description");
+  marker.bindPopup(defaultPopup);
   newPinLat = lat;
   newPinLng = lng;
   return false; // To disable default popup.
@@ -98,6 +99,22 @@ const removeFolderSpace = function(selector) {
   if (!$(`${selector} .hide`).height() > 0) {
     $(selector).removeClass('push-next');
   }
+};
+
+// Show selector1 and hide selector 2
+const toggleForm = function(selector1, selector2) {
+  $(selector1).removeClass('form-hide');
+  $(selector2).addClass('form-hide');
+};
+
+const showEditPinTitle = function() {
+  $('#new-pin-collapse h2:nth-of-type(2)').removeClass('form-hide');
+  $('#new-pin-collapse h2:nth-of-type(1)').addClass('form-hide');
+};
+
+const showNewPinTitle = function() {
+  $('#new-pin-collapse h2:nth-of-type(1)').removeClass('form-hide');
+  $('#new-pin-collapse h2:nth-of-type(2)').addClass('form-hide');
 };
 
 // Collapse folder sections on click
