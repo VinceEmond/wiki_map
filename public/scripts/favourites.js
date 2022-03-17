@@ -14,6 +14,7 @@
       <div class="map_favourite_element_wrapper">
         <p class="favourite_map_name"><a id="favourite-${escape(mapData.id)}" href="#">${escape(mapData.name)}</a></p>
         <p>${escape(mapData.description)}</p>
+        <p><button id="remove_${escape(mapData.id)}" type="submit">Remove</button></p>
       </div>
     `);
     return $map;
