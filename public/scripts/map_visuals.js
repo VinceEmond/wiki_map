@@ -175,6 +175,12 @@ $('#new-map-button').click(() => {
   removeFolderSpace('.folder:nth-of-type(6)');
 });
 $('#new-pin-button').click(() => {
+  if ($('#pform').hasClass('form-hide')) {
+    toggleForm('#pform', '#update-pform');
+    showNewPinTitle();
+    return;
+  }
+
   toggleForm('#pform', '#update-pform');
   showNewPinTitle();
   $('.new_pin').slideToggle();
