@@ -111,6 +111,9 @@ $mapPointsList.on('click',function(event) {
     $.ajax({ url: `map_points/${mapPointId}/delete`, method: "POST", data: dataForCall})
       .then((response, status) => {
         // console.log(`Map ID ${currentMapId}'s map_point ${mapPointId} has been made inactive.`);
+        toggleForm('#pform', '#update-pform');
+        showNewPinTitle();
+        clearUpdateMapPointFormInputs();
         reloadMap();
       })
       .catch((err) => {
@@ -149,6 +152,7 @@ $updateMapPointCancelBtn.on('click', function(event) {
   event.preventDefault();
   toggleForm('#pform', '#update-pform');
   showNewPinTitle();
+  clearUpdateMapPointFormInputs();
 });
 
 // List for update button on map_points update form
