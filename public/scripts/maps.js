@@ -49,7 +49,7 @@ $(document).ready(function() {
         console.log("error:", err.message);
       });
   };
-//*********** End Map List Render Functions ***********/
+  //*********** End Map List Render Functions ***********/
 
   const mapDataIsValid = function(textString) {
 
@@ -67,44 +67,44 @@ $(document).ready(function() {
   // $("#error-msg").hide();
   // return true;
   };
-const getMap = function(mapId) {
-  let queryObj = {
-        id: mapId
-      };
-      request = $.ajax({ url: "/maps/" + mapId, method: "GET", data: queryObj});
+  const getMap = function(mapId) {
+    let queryObj = {
+      id: mapId
+    };
+    request = $.ajax({ url: "/maps/" + mapId, method: "GET", data: queryObj});
 
-      // Callback handler that will be called on success
-      request.done(function(response, status, jqXHR) {
-        console.log("Map GET successful. MapID:", response.map);
-        const {
-          id,
-          active,
-          owner_id,
-          name,
-          description,
-          coord_x,
-          coord_y,
-          zoom
-        } = response.map;
+    // Callback handler that will be called on success
+    request.done(function(response, status, jqXHR) {
+      console.log("Map GET successful. MapID:", response.map);
+      const {
+        id,
+        active,
+        owner_id,
+        name,
+        description,
+        coord_x,
+        coord_y,
+        zoom
+      } = response.map;
         //*****Open the Selected Map *******/
-        currentMapId = id;
-        $("#map-name").text(name);
-        map.remove();
-        initMap();
-        setView(coord_x, coord_y, zoom);
-        loadMapPoints();
-      });
-      // Callback handler that will be called on failure
-      request.fail(function(jqXHR, status, error) {
-        //if there was a failure
-        console.error("The form POST failed. Error: " + status, error);
-      });
-      // Callback handler that will be called regardless
-      // if the request failed or succeeded
-      request.always(function() {
-        //$inputs.prop("disabled", false);
-      });
-}
+      currentMapId = id;
+      $("#map-name").text(name);
+      map.remove();
+      initMap();
+      setView(coord_x, coord_y, zoom);
+      loadMapPoints(currentMapId);
+    });
+    // Callback handler that will be called on failure
+    request.fail(function(jqXHR, status, error) {
+      //if there was a failure
+      console.error("The form POST failed. Error: " + status, error);
+    });
+    // Callback handler that will be called regardless
+    // if the request failed or succeeded
+    request.always(function() {
+      //$inputs.prop("disabled", false);
+    });
+  };
   $(function() {
     let  request = null;
     //****** ROUTE: GET maps/:id ************/
@@ -119,7 +119,7 @@ const getMap = function(mapId) {
 
     $('.contributed_maps_list').on('click', function(event) {
       event.preventDefault();
-      event.target.id
+      event.target.id;
       getMap(event.target.id.split('-')[1]);
     });
 
@@ -156,7 +156,7 @@ const getMap = function(mapId) {
         initMap();
         $("#map-name").text(response.map.name);
         setView(response.map.coord_x, response.map.coord_y, response.map.zoom);
-        loadMapPoints();
+        loadMapPoints(currentMapId);
         loadMaps();
         loadContributorMaps();
         loadFavouritesMaps();

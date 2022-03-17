@@ -1,25 +1,18 @@
-// Client facing scripts here
-
-/****************************/
-/*     AFTER HTML LOADS     */
-/****************************/
-// $(() => {
-
 
 /****************************/
 /*        VARIABLES         */
 /****************************/
-const $newMapPoint = $('.new_pin form');
+
+const $newMapPointSubmitBtn = $('#psubmit');
 const $mapPointsList = $('.map_points_list');
 const $newMapPointTitleInput = $("#ptitle");
 const $newMapPointUrlInput = $("#pimage");
 const $newMapPointDescInput = $("#pdesc");
-const $updateMapPointSubmitBtn = $('#update-psubmit');
-const $updateMapPointCancelBtn = $('#cancel-psubmit');
 const $updateMapPointTitleInput = $('#update-ptitle');
 const $updateMapPointDescInput = $('#update-pdesc');
 const $updateMapPointURLInput = $('#update-pimage');
-
+const $updateMapPointSubmitBtn = $('#update-psubmit');
+const $updateMapPointCancelBtn = $('#cancel-psubmit');
 let idOfMapPointToUpdate;
 
 
@@ -27,53 +20,8 @@ let idOfMapPointToUpdate;
 /*        FUNCTIONS         */
 /****************************/
 
-
-const escape = function(str) {
-  let div = document.createElement("div");
-  div.appendChild(document.createTextNode(str));
-  return div.innerHTML;
-};
-
-// Create HTML element for a Single Map Point List Item
-const createMapPointElement = function(mapPointData) {
-  const {name, description, id} = mapPointData;
-
-  const $mapPoint = $(`
-    <div class="map_point_element_wrapper">
-      <a class="name" href="/map_points/${id}">${escape(name)}</a>
-      <p>${escape(description)}</p>
-      <button type="button" id="map_point_${id}_edit"> Edit </button>
-      <button type="submit" id="map_point_${id}_delete"> Delete </button>
-    </div>
-  `);
-  return $mapPoint;
-};
-
-// Loops through all Map_points, and appends to map_point list
-const renderMapPointsList = function(mapPointsArr) {
-  for (const mapPoint of mapPointsArr) {
-    $mapPointsList.prepend(createMapPointElement(mapPoint));
-    generatePin(mapPoint.coord_x, mapPoint.coord_y, mapPoint.image, mapPoint.name, mapPoint.description);
-  }
-  return;
-};
-
-const loadMapPoints = function() {
-  const dataForCall = {
-    map_id: currentMapId
-  };
-
-  $.ajax({url: "/map_points", method: 'GET', data: dataForCall})
-    .then((response) => {
-      const mapPointsArr = response.mapPoints;
-      // Clear all existing map_points in the list
-      $(".map_point_element_wrapper").remove();
-      // Render Map points in list and on map using data from database
-      renderMapPointsList(mapPointsArr);
-    })
-    .catch(err => {
-      console.log(err);
-    });
+const clearMapPointsList = function() {
+  $(".map_point_element_wrapper").remove();
 };
 
 const clearNewMapPointFormInputs = function() {
@@ -88,106 +36,182 @@ const clearUpdateMapPointFormInputs = function() {
   $updateMapPointURLInput.val('');
 };
 
+const populateUpdateForm = function(mapPoint) {
+  const {name, description, image} = mapPoint;
+  $updateMapPointTitleInput.val(name);
+  $updateMapPointDescInput.val(description);
+  $updateMapPointURLInput.val(image);
+};
 
-/****************************/
-/*      EVENT LISTENERS     */
-/****************************/
+const displayErrorMsg = function(error) {
+  console.log(`Error - ${error.status} : ${error.statusText}`);
+};
 
+const focusOnPin = function(mapPoint) {
+  const {coord_x, coord_y} = mapPoint;
+  setView(coord_x, coord_y, focusOnPinZoom);
+};
 
-// Listen for EDIT or DELETE buttons in map_points list
-$mapPointsList.on('click',function(event) {
-  event.preventDefault();
-
-  const type = event.target.id.split('_')[3];
-  const mapPointId = event.target.id.split('_')[2];
-
-  // If DELETE button is pressed for a map_point
-  if (type === 'delete') {
-    const dataForCall = {
-      map_id: currentMapId,
-      map_point_id: mapPointId
-    };
-
-    $.ajax({ url: `map_points/${mapPointId}/delete`, method: "POST", data: dataForCall})
-      .then((response, status) => {
-        // console.log(`Map ID ${currentMapId}'s map_point ${mapPointId} has been made inactive.`);
-        toggleForm('#pform', '#update-pform');
-        showNewPinTitle();
-        clearUpdateMapPointFormInputs();
-        reloadMap();
-      })
-      .catch((err) => {
-        console.log("Error :", err);
-      });
+const setUILayout = function(layout) {
+  if (layout === 'newMapPoint') {
+    toggleForm('#pform', '#update-pform');
+    showNewPinTitle();
+    clearUpdateMapPointFormInputs();
   }
 
-  // If EDIT button is pressed for a map_point
-  if (type === 'edit') {
-
-    $.ajax({ url: `map_points/${mapPointId}`, method: "GET"})
-      .then((response) => {
-        const {name, description, image, id} = response.mapPoint;
-        idOfMapPointToUpdate = id;
-        // Populate text boxes with existing values from db
-        $updateMapPointTitleInput.val(name);
-        $updateMapPointDescInput.val(description);
-        $updateMapPointURLInput.val(image);
-      })
-      .catch((err) => {
-        console.log("Error :", err);
-      });
-
+  if (layout === 'updateMapPoint') {
     toggleForm('#update-pform', '#pform');
     showEditPinTitle();
     $('.new_pin').slideToggle();
     hideFolders('.new_pin');
     removeFolderSpace('.folder:nth-of-type(7)');
   }
+};
 
-});
+const createMapPointElement = function(mapPoint) {
+  // Create and return HTML element for a Single Map Point List Item
+  const {name, description, id} = mapPoint;
+  const $mapPoint = $(`
+    <div class="map_point_element_wrapper">
+      <a class="name" id="map_point_${escape(id)}_title" href="/map_points/${id}">${escape(name)}</a>
+      <p>${escape(description)}</p>
+      <button type="button" id="map_point_${escape(id)}_edit"> Edit </button>
+      <button type="submit" id="map_point_${escape(id)}_delete"> Delete </button>
+    </div>
+  `);
+  return $mapPoint;
+};
+
+const renderMapPoints = function(mapPointsArr) {
+  // Append every map_point from array to the sidebar list and generate a pin on the map
+  for (const mapPoint of mapPointsArr) {
+    $mapPointsList.prepend(createMapPointElement(mapPoint));
+    generatePin(mapPoint);
+  }
+};
+
+const loadMapPoints = function(mapId) {
+  getAllMapPoints(mapId)
+    .then(mapPointsArr => {
+      clearMapPointsList();
+      renderMapPoints(mapPointsArr);
+    })
+    .catch(error => console.log(error));
+};
 
 
-// Listen for cancel button on map_points update form
-$updateMapPointCancelBtn.on('click', function(event) {
+/****************************/
+/*       AJAX CALLS         */
+/****************************/
+
+const getAllMapPoints = function(mapId) {
+  const dataForCall = {map_id: mapId};
+  return $.ajax({url: "/map_points", method: 'GET', data: dataForCall})
+    .then(response => response.mapPoints)
+    .catch(error => displayErrorMsg(error));
+};
+
+const getPointById = function(mapPointId) {
+  return $.ajax({ url: `map_points/${mapPointId}`, method: "GET"})
+    .then(response => response.mapPoint)
+    .catch(error => displayErrorMsg(error));
+};
+
+const updateMapPoint = function(mapPointId, dataForCall) {
+  return $.ajax({url: `map_points/${idOfMapPointToUpdate}`, method: "POST", data: dataForCall})
+    .then(response => response.updatedMapPoint)
+    .catch(error => displayErrorMsg(error));
+};
+
+const createMapPoint = function(dataForCall) {
+  return $.ajax({ url: "/map_points", method: "POST", data: dataForCall})
+    .then(response => response.newMapPoint)
+    .catch(error => displayErrorMsg(error));
+};
+
+const deleteMapPoint = function(mapPointId) {
+  const dataForCall = {map_point_id: mapPointId};
+  return $.ajax({ url: `map_points/${mapPointId}/delete`, method: "POST", data: dataForCall})
+    .then(response => response)
+    .catch(error => displayErrorMsg(error));
+};
+
+
+/****************************/
+/*      EVENT LISTENERS     */
+/****************************/
+
+$mapPointsList.click(function(event) {
   event.preventDefault();
-  toggleForm('#pform', '#update-pform');
-  showNewPinTitle();
-  clearUpdateMapPointFormInputs();
+  const interaction = event.target.id.split('_')[3];
+  const mapPointId = event.target.id.split('_')[2];
+
+  // MAP POINT LIST - DELETE button
+  if (interaction === 'delete') {
+    deleteMapPoint(mapPointId)
+      .then(() => {
+      // console.log("Deleted the map_point with ID:", mapPointId);
+        setUILayout('newMapPoint');
+        reloadMap();
+      })
+      .catch(error => console.log(error));
+  }
+
+  // MAP POINT LIST - EDIT button
+  if (interaction === 'edit') {
+    idOfMapPointToUpdate = mapPointId;
+
+    getPointById(mapPointId)
+      .then(mapPoint => {
+        populateUpdateForm(mapPoint);
+        setUILayout('updateMapPoint');
+      })
+      .catch(error => console.log(error));
+  }
+
+  // MAP POINT LIST - TITLE click event
+  if (interaction === 'title') {
+    getPointById(mapPointId)
+      .then(mapPoint => focusOnPin(mapPoint))
+      .catch(error => console.log(error));
+  }
+
 });
 
-// List for update button on map_points update form
-$updateMapPointSubmitBtn.on('click', function(event) {
+$updateMapPointCancelBtn.click(function(event) {
+  event.preventDefault();
+  // console.log("Cancel button clicked! Resetting UI to new map point layout");
+  clearUpdateMapPointFormInputs();
+  setUILayout('newMapPoint');
+});
+
+$updateMapPointSubmitBtn.click(function(event) {
   event.preventDefault();
   // console.log("Update button clicked! ID of map point to update:", idOfMapPointToUpdate);
 
-  const dataForCall = {
+  let updateMapPointUrlInput = $updateMapPointURLInput.val();
+
+  // If image URL input box is empty, set a default map pin image
+  if (!updateMapPointUrlInput) {
+    updateMapPointUrlInput = defaultNewPinImageURL;
+  }
+
+  const updatedData = {
     name: $updateMapPointTitleInput.val(),
     description: $updateMapPointDescInput.val(),
-    image: $updateMapPointURLInput.val()
+    image: updateMapPointUrlInput
   };
 
-  $.ajax({url: `map_points/${idOfMapPointToUpdate}`, method: "POST", data: dataForCall})
-    .then((response) => {
-      console.log("The response with point", response.mapPoint);
-      clearUpdateMapPointFormInputs();
+  updateMapPoint(idOfMapPointToUpdate, updatedData)
+    .then(updatedMapPoint => {
+      // console.log("Updated the following map_point:", updatedMapPoint);
       reloadMap();
     })
-    .catch((err) => {
-      console.log("Error Status:", err.status);
-      console.log("Error Status Text:", err.statusText);
-    });
-});
-
-// Listen for the favourite button to be clicked
-$('#fav-button').on('click', function(event) {
-  event.preventDefault();
-  console.log("Fav Button clicked!");
-
+    .catch(error => console.log(error));
 });
 
 
-// Create a new map_point
-$newMapPoint.submit(function(event) {
+$newMapPointSubmitBtn.click(function(event) {
   event.preventDefault();
 
   const userIDFromCookie = document.cookie.split('=')[1];
@@ -205,28 +229,23 @@ $newMapPoint.submit(function(event) {
     description: $newMapPointDescInput.val(),
     coord_x: newPinLat,
     coord_y: newPinLng,
-    zoom: 16,
+    zoom: defaultNewPinZoom,
     image: newMapPointUrlInput
   };
 
-  $.ajax({ url: "/map_points", method: "POST", data: dataForCall})
-    .then((response, status) =>  {
-      // console.log(`Created a new map point on map_id ${currentMapId}. The new map_point's ID is: `, response.newMapPoint.id);
+  createMapPoint(dataForCall)
+    .then(newMapPoint => {
+      // console.log('User ID', userIDFromCookie, 'created a new map point:', newMapPoint);
       clearNewMapPointFormInputs();
       reloadMap();
     })
-    .catch((err) => {
-      console.log("Error :", err.message);
-    });
+    .catch(error => console.log(error));
+
 });
-
-
 
 
 /****************************/
 /*     ON INITIAL LOAD      */
 /****************************/
 
-loadMapPoints();
-
-// });
+loadMapPoints(currentMapId);

@@ -10,12 +10,13 @@ const mapStartingLat = 49.285395314699244;
 const mapStartingLng = -123.12673661801905;
 const mapStartingZoom = 13;
 
-// Place new pin on the map at lat, lng
-const generatePin = function(lat, lng, img, name, desc) {
-  const marker = L.marker([lat, lng]);
-  marker.addTo(map);
-  marker.bindPopup(`<div class='pin-popup'><img src='${img}'><h1>${name}</h1><h2>${desc}</h2></div>`);
+// Place new pin on the map
+const generatePin = function(mapPoint) {
+  const {coord_x, coord_y, image, name, description} = mapPoint;
+  const marker = L.marker([coord_x, coord_y]).addTo(map);
+  marker.bindPopup(`<div class='pin-popup'><img src='${image}'><h1>${name}</h1><h2>${description}</h2></div>`);
 };
+
 
 const reloadMap = function() {
   const {lat, lng} = map.getCenter();
@@ -28,7 +29,7 @@ const reloadMap = function() {
       animate: false
     }
   });
-  loadMapPoints();
+  loadMapPoints(currentMapId);
 };
 
 // Set view and zoom for the map

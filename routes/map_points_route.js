@@ -106,9 +106,9 @@ module.exports = (db) => {
 
     db.query(queryStr, queryParams)
       .then(response => {
-        const mapPoint = response.rows[0];
+        const updatedMapPoint = response.rows[0];
         // console.log("Returned updated map point", response.rows[0]);
-        res.json({ mapPoint });
+        res.json({ updatedMapPoint });
       })
       .catch(err => {
         res
@@ -155,21 +155,19 @@ module.exports = (db) => {
   router.post('/:id/delete', (req, res) => {
 
     const map_point_id = req.body.map_point_id;
-    const map_id = req.body.map_id;
-
 
     const queryStr = `
     UPDATE map_points
     SET active = false
-    WHERE map_points.map_id = $1
-    AND map_points.id = $2;
+    WHERE map_points.id = $1
+    RETURNING *;
     `;
 
-    const queryParams = [map_id,map_point_id];
+    const queryParams = [map_point_id];
 
     db.query(queryStr, queryParams)
       .then((response) => {
-        console.log('Set the map_point to inactive');
+        // console.log(`Set map_point ID ${map_point_id} "active" property to false`);
         res.json({});
       })
       .catch(err => {
