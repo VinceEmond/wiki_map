@@ -18,35 +18,35 @@ module.exports = (db) => {
     }
     next();
   });
- // GET maps/contributors   ---  Get a map by Contributors
- router.get("/", (req, res) => {
+  // GET maps/contributors   ---  Get a map by Contributors
+  router.get("/", (req, res) => {
 
-  db.query(`
-    SELECT * from
-      ( SELECT maps.id as id,  maps.name AS name, maps.description AS description, maps.owner_id
-        FROM maps
-        JOIN map_points ON map_points.map_id = maps.id
-        WHERE map_points.owner_id = $1 and map_points.active = true and maps.active = true
-        GROUP BY maps.id
-        UNION
-        SELECT maps.id as id,  maps.name AS name, maps.description AS description, maps.owner_id
-        FROM maps
-        WHERE maps.owner_id = $1
-        AND maps.active = true
-      ) contrib
-    ORDER BY id
-    LIMIT 15;`, [req.cookies.user_id]
-  )
-    .then(data => {
-      const maps = data.rows;
-      res.json({ maps });
-    })
-    .catch(err => {
-      console.log("error:", err.message)
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
+    db.query(`
+      SELECT * from
+        ( SELECT maps.id as id,  maps.name AS name, maps.description AS description, maps.owner_id
+          FROM maps
+          JOIN map_points ON map_points.map_id = maps.id
+          WHERE map_points.owner_id = $1 and map_points.active = true and maps.active = true
+          GROUP BY maps.id
+          UNION
+          SELECT maps.id as id,  maps.name AS name, maps.description AS description, maps.owner_id
+          FROM maps
+          WHERE maps.owner_id = $1
+          AND maps.active = true
+        ) contrib
+      ORDER BY id
+      LIMIT 15;`, [req.cookies.user_id]
+    )
+      .then(data => {
+        const maps = data.rows;
+        res.json({ maps });
+      })
+      .catch(err => {
+        console.log("error:", err.message);
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
   });
-return router;
+  return router;
 };
