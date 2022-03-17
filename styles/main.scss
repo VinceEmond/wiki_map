@@ -249,15 +249,49 @@ nav button:hover {
 // ---------------------------------
 // styling for the new pin forms
 // ---------------------------------
-.new_pin, .new_map {
-  text-align: right;
-}
-
 .form-hide {
   display: none;
 }
 
-#new-pin-collapse h2 {
+form label {
+  float: left;
+}
+
+form input[type=text] {
+  width: 100%;
+}
+
+form input[type=submit] {
+  background-color: white;
+  border: none;
+  color: black;
+  padding: 4px 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 25px;
+}
+
+// targets submit buttons
+#update-psubmit:hover, #psubmit:hover {
+  cursor: pointer;
+  background-color: rgba(21, 255, 0, 0.4);
+}
+
+#update-psubmit {
+  margin-right: 5px;
+}
+
+#cancel-psubmit {
+  margin-left: 5px;
+}
+
+// targets cancel button
+#cancel-psubmit:hover {
+  cursor: pointer;
+  background-color: rgba(255, 0, 0, 0.4);
 }
 
 
