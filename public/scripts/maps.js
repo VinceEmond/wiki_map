@@ -1,8 +1,10 @@
-// Client facing scripts here
+  //********* Map List  Functions **********/
 
 const startingMapName = "Vancouver Coffee Shops";
 
 $(document).ready(function() {
+  //********* Map List Render Functions **********/
+
   //this escapes the content
   const escape = function(str) {
     let div = document.createElement("div");
@@ -10,10 +12,9 @@ $(document).ready(function() {
     return div.innerHTML;
   };
 
-  //********* Map List Render Functions **********/
   //this creates the HTML for a single map item
   const createMapElement = function(mapData) {
-    // href="/maps/${escape(mapData.id)}""
+
     const $map = $(`
       <div class="map_element_wrapper">
         <p class="map_name"><a id="${escape(mapData.id)}" href="#">${escape(mapData.name)}</a></p>
@@ -27,6 +28,7 @@ $(document).ready(function() {
     `);
     return $map;
   };
+
   //this appends map items to the maps_list element in index.ejs.
   const renderMaps = function(arrMapData) {
     $('.map_element_wrapper').remove();
@@ -39,7 +41,7 @@ $(document).ready(function() {
     return;
   };
 
-  //this request the data from /maps GET route and renders all map items
+  //this requests the data from /maps GET route and renders all map items
   const loadMaps = function() {
     $.ajax('/maps', { method: 'GET' })
       .then(function(mapsText) {
@@ -49,7 +51,7 @@ $(document).ready(function() {
         console.log("error:", err.message);
       });
   };
-
+  //this adds a new favourite /favourites/new POST route and re-renders all map favourites
   const addToFavourites = function (mapId, userId) {
     const queryObj = { map_id: mapId, user_id: userId };
     $.ajax('/favourites/new', { method: 'POST', data: queryObj})
@@ -60,6 +62,7 @@ $(document).ready(function() {
       console.log("error:", err.message);
     });
   }
+  //this deletes a map from the maps list using /maps/:id/delete POST route and re-renders all map lists
   const deleteMap = function (mapId, userId) {
     const queryObj = { map_id: mapId, user_id: userId };
     $.ajax('/maps/' + mapId + '/delete', { method: 'POST', data: queryObj})
@@ -74,51 +77,46 @@ $(document).ready(function() {
   }
 //*********** End Map List Render Functions ***********/
 
-const getMap = function(mapId) {
-  let queryObj = {
-        id: mapId
-      };
-      request = $.ajax({ url: "/maps/" + mapId, method: "GET", data: queryObj});
+//this gets a map from the maps using /maps/"id" GET route and renders it.
+  const getMap = function(mapId) {
+    let queryObj = {
+      id: mapId
+    };
+    request = $.ajax({ url: "/maps/" + mapId, method: "GET", data: queryObj});
 
-      // Callback handler that will be called on success
-      request.done(function(response, status, jqXHR) {
-        console.log("Map GET successful. MapID:", response.map);
-        const {
-          id,
-          active,
-          owner_id,
-          name,
-          description,
-          coord_x,
-          coord_y,
-          zoom
-        } = response.map;
-        //*****Open the Selected Map *******/
-        currentMapId = id;
-        $("#map-name").text(name);
-        map.remove();
-        initMap();
-        setView(coord_x, coord_y, zoom);
-        loadMapPoints();
-      });
-      // Callback handler that will be called on failure
-      request.fail(function(jqXHR, status, error) {
-        //if there was a failure
-        console.error("The form POST failed. Error: " + status, error);
-      });
-      // Callback handler that will be called regardless
-      // if the request failed or succeeded
-      request.always(function() {
-        //$inputs.prop("disabled", false);
-      });
-}
+    // Callback handler that will be called on success
+    request.done(function(response, status, jqXHR) {
+      console.log("Map GET successful. MapID:", response.map);
+      const {
+        id,
+        active,
+        owner_id,
+        name,
+        description,
+        coord_x,
+        coord_y,
+        zoom
+      } = response.map;
+
+      currentMapId = id;
+      $("#map-name").text(name);
+      map.remove();
+      initMap();
+      setView(coord_x, coord_y, zoom);
+      loadMapPoints();
+    });
+    // Callback handler that will be called on failure
+    request.fail(function(jqXHR, status, error) {
+      //if there was a failure
+      console.error("The form POST failed. Error: " + status, error);
+    });
+  }
+
+// Event Handlers
   $(function() {
     let  request = null;
-    //****** ROUTE: GET maps/:id ************/
-    //this is the map selection form the maps list.
-    //it fires when a map link is clicked and then gets the details of the map
-    //and renders it.
 
+    //side bar list item click handler.
     $('.maps_list').on('click', function(event) {
       event.preventDefault();
       if (event.target.nodeName==='A'){
@@ -134,16 +132,16 @@ const getMap = function(mapId) {
       }
     });
 
+    //side bar list click handler.
     $('.contributed_maps_list').on('click', function(event) {
       event.preventDefault();
       event.target.id
       getMap(event.target.id.split('-')[1]);
     });
 
-
-    const $form = $('.new_map form');
     //****** ROUTE: POST maps/ ************/
     //Save new maps and recreate the sidebar list.
+    const $form = $('.new_map form');
     $form.submit(function(event) {
       event.preventDefault();
 
@@ -157,23 +155,21 @@ const getMap = function(mapId) {
       };
       console.log("queryObj:", queryObj);
 
-      //****************TODO****************************/
-      //**Add data validation here**/
-
       request = $.ajax({ url: "/maps", method: "POST", data: queryObj});
       // Callback handler that will be called on success
       request.done(function(response, status, jqXHR) {
-
         //if successful clear out the text values.
         $("#mtitle").val("");
         $("#mdesc").val("");
-        //FIX TODO
         currentMapId = response.map.id;
+        //clear out the map and pins
         map.remove();
         initMap();
+        //setup the new map and add the pins
         $("#map-name").text(response.map.name);
         setView(response.map.coord_x, response.map.coord_y, response.map.zoom);
         loadMapPoints();
+        //reload all the map lists
         loadMaps();
         loadContributorMaps();
         loadFavouritesMaps();
@@ -183,15 +179,12 @@ const getMap = function(mapId) {
         //if there was a failure
         console.error("The form POST failed. Error: " + status, error);
       });
-      // Callback handler that will be called regardless
-      // if the request failed or succeeded
-      request.always(function() {
-        //$inputs.prop("disabled", false);
-      });
     });
-
   });
-  //the map list gets rendered the first time.
+  // Set the Map Title.
   $("#map-name").text(startingMapName);
+  // initial load of the maps list.
   loadMaps();
 });
+
+// END//
