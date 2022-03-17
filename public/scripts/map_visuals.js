@@ -65,7 +65,6 @@ const initMap = function() {
 document.getElementById("map").addEventListener("contextmenu", function(event) {
   // Prevent the browser's context menu from appearing
   event.preventDefault();
-  console.log("I got your pin request!");
   const defaultPopup = "<div class='pin-popup'><img src='../images/map_logo.png'><h1>New Pin</h1><h2>Add a description!</h2></div>";
 
   if (updatePin === false) {

@@ -1,19 +1,15 @@
 /*
- * All routes for Users are defined here
- * Since this file is loaded in server.js into api/users,
- *   these routes are mounted onto /users
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
 const express = require('express');
 const router  = express.Router();
 
-
-// GET maps/   ---   Browse all maps Limit to 10
 module.exports = (db) => {
   //this will reroute if the cookie hasn't
   //been set (user not logged in).
   router.use((req, res, next) => {
+    console.log("I hit the cookie checker in the maps js");
     if (!req.cookies) {
       res.redirect('/login');
       return;
@@ -23,6 +19,8 @@ module.exports = (db) => {
     }
     next();
   });
+
+  // GET maps/   ---   Browse all maps Limit to 10
   router.get("/", (req, res) => {
 
     db.query(`
@@ -36,12 +34,13 @@ module.exports = (db) => {
         res.json({ maps });
       })
       .catch(err => {
-        console.log("error:", err.message)
+        console.log("error:", err.message);
         res
           .status(500)
           .json({ error: err.message });
       });
   });
+  // GET maps/:id   ---  Get a map by id
   router.get("/:id", (req, res) => {
 
     db.query(`
@@ -61,6 +60,7 @@ module.exports = (db) => {
       });
   });
 
+  // POST maps/   ---  Save a new map
   router.post("/", (req, res) => {
     const str = `
     INSERT INTO maps (owner_id, name, description, coord_x, coord_y, zoom) VALUES
