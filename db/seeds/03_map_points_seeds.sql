@@ -18,7 +18,7 @@ INSERT INTO map_points (map_id, owner_id, name, coord_x, coord_y, zoom, descript
   (1, 1, 'Two Parking Spots', 51.524806780761566, -0.10613814160373851, 16, 'Right in front of the shop', 'https://c8.alamy.com/comp/TTWXKE/london-uk-may-14-2019-nudie-jeans-repair-shop-storefront-in-brick-lane-area-shoreditch-TTWXKE.jpg'),
   (1, 1, 'Hyde Park Parking', 51.512773098349115, -0.16972390687434696, 16, 'Free for 3 hours!', 'https://media-cdn.tripadvisor.com/media/photo-s/15/12/94/0c/hyde-park-london.jpg'),
   (1, 1, 'Parking London Bridge', 51.50141313756198, -0.11779783762700866, 16, 'Free parking with an epic view!', 'https://cdn.britannica.com/35/156335-050-62245FCA/Tower-Bridge-River-Thames-London.jpg'),
-  (1, 1, 'Parking In Alley', 51.51201113077422, -0.04868695749095234, 16, 'A bit sketcyhy but it''s free!', 'https://i.dailymail.co.uk/i/pix/2013/08/20/article-2397899-1B606D0C000005DC-903_964x632.jpg'),
+  (1, 1, 'Parking In Alley', 51.51201113077422, -0.04868695749095234, 16, 'A bit sketchy but it''s free!', 'https://i.dailymail.co.uk/i/pix/2013/08/20/article-2397899-1B606D0C000005DC-903_964x632.jpg'),
   (5, 1, 'Epic View Crag', 49.670842315837056, -123.15131779679258, 16, 'Lives up to it''s name!', 'https://i.redd.it/wmhp0i5f91c71.jpg'),
   (5, 1, 'The Fun Route', 49.6730280613224, -123.13105911377112, 16, 'Easy one to do with anyone', 'https://blog.arcteryx.com/wp-content/uploads/2017/07/John-Price_.jpg'),
   (5, 2, 'The Crack Addict', 49.68157967517898, -123.12121781664128, 16, 'For all the crack lovers out there', 'https://www.vmcdn.ca/f/files/glaciermedia/import/lmp-all/1650205-arrowroot-siy-a-m-sma-nit-stawamus-chief-squamish-british-columbia-canada-rock-climb-climbing.jpg'),
