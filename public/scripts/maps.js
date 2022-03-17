@@ -1,12 +1,4 @@
 // Client facing scripts here
-// Map {
-//   id: 'id',
-//   name: 'name',
-//   description: 'description',
-//   coordX: 'coord_X',
-//   coordY: 'coord_Y',
-//   zoom: 'zoom'
-// };
 
 $(document).ready(function() {
   //this escapes the content
@@ -56,41 +48,6 @@ $(document).ready(function() {
       });
   };
 //*********** End Map List Render Functions ***********/
-
-//********* Contributor Map List Render Functions **********/
-    //this creates the HTML for a single map item
-    const createContributorMapElement = function(mapData) {
-      // href="/maps/${escape(mapData.id)}""
-          const $map = $(`
-            <div class="map_contrib_element_wrapper">
-              <p class="contrib_map_name"><a id="contrib-${escape(mapData.id)}" href="#">${escape(mapData.name)}</a></p>
-              <p>${escape(mapData.description)}</p>
-            </div>
-          `);
-          return $map;
-        };
-        //this appends map items to the maps_list element in index.ejs.
-        const renderContributorMaps = function(arrMapData) {
-          $('.map_contrib_element_wrapper').remove();
-          if (arrMapData.maps) {
-            for (let mapData of arrMapData.maps) {
-              const $map = createContributorMapElement(mapData);
-              $('.contributed_maps_list').prepend($map);
-            }
-          }
-          return;
-        };
-    //this request the data from /maps GET route and renders all map items
-    const loadContributorMaps = function() {
-      $.ajax('/maps/contributors', { method: 'GET' })
-        .then(function(mapsText) {
-          renderContributorMaps(mapsText);
-        })
-        .catch(err => {
-          console.log("error:", err.message);
-        });
-    };
-//******** End Contributor Map List Render Functions ***********/
 
   const mapDataIsValid = function(textString) {
 
@@ -216,5 +173,4 @@ const getMap = function(mapId) {
   });
   //the map list gets rendered the first time.
   loadMaps();
-  loadContributorMaps();
 });
