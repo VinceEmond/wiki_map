@@ -197,7 +197,6 @@ nav button:hover {
 
 .pin-popup h2 {
   font-size: 12px;
-  font-weight: lighter;
 }
 
 // ---------------------------------
@@ -294,5 +293,42 @@ form input[type=submit] {
   background-color: rgba(255, 0, 0, 0.4);
 }
 
+// ---------------------------------------
+// styling for the favourites folder items
+// ---------------------------------------
+.map_favourite_element_wrapper {
+  margin-bottom: 10px;
+  padding: 8px;
+  border-radius: 5px;
+  background-color: rgb(235, 235, 235);
+}
+
+.map_favourite_element_wrapper button {
+  background-color: white;
+  border: none;
+  color: black;
+  padding: 4px 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 25px;
+}
+
+.map_favourite_element_wrapper button:hover {
+  cursor: pointer;
+  background-color: rgba(255, 0, 0, 0.4);
+}
+
+// ------------------------------------------
+// styling for the contributions folder items
+// ------------------------------------------
+.map_contrib_element_wrapper {
+  margin-bottom: 10px;
+  padding: 8px;
+  border-radius: 5px;
+  background-color: rgb(235, 235, 235);
+}
 
 
