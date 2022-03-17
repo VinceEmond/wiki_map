@@ -17,7 +17,6 @@ module.exports = (db) => {
   });
 
   router.get('/:id', (req, res) => {
-    console.log("userLoginid:", req.params.id)
     // set the cookie
     res.cookie('user_id', req.params.id);
 

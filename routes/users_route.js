@@ -30,7 +30,7 @@ module.exports = (db) => {
       })
       .catch(err => {
         res
-          .status(500)
+          .status(500);
       });
   });
   //users GET Route

@@ -1,19 +1,12 @@
-$(document).ready(function() {
-  //this escapes the content
-  const escape = function(str) {
-    let div = document.createElement("div");
-    div.appendChild(document.createTextNode(str));
-    return div.innerHTML;
-  };
-
   //********* Favourites Map List Render Functions **********/
   //this creates the HTML for a single map item
   const createFavouritesMapElement = function(mapData) {
-  // href="/maps/${escape(mapData.id)}""
+
     const $map = $(`
       <div class="map_favourite_element_wrapper">
         <p class="favourite_map_name"><a id="favourite-${escape(mapData.id)}" href="#">${escape(mapData.name)}</a></p>
         <p>${escape(mapData.description)}</p>
+        <p><button id="remove_${escape(mapData.id)}" type="submit">Remove</button></p>
       </div>
     `);
     return $map;
@@ -72,16 +65,11 @@ $(document).ready(function() {
       //if there was a failure
       console.error("The form POST failed. Error: " + status, error);
     });
-    // Callback handler that will be called regardless
-    // if the request failed or succeeded
-    request.always(function() {
-      //$inputs.prop("disabled", false);
-    });
   };
-
+  // Event Handlers
   $(function() {
     let  request = null;
-
+    // Handles the favourites list item click event.
     $('.favourites_list').on('click', function(event) {
       event.preventDefault();
       event.target.id
@@ -91,4 +79,4 @@ $(document).ready(function() {
   });
 
   loadFavouritesMaps();
-});
+// END //

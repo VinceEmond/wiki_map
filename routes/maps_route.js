@@ -85,6 +85,25 @@ module.exports = (db) => {
       });
 
   });
+  // POST maps/   ---  Save a new map
+  router.post("/:id/delete", (req, res) => {
+    const str = `
+    UPDATE maps SET active = false WHERE id = $1 AND owner_id = $2;`;
+    const { map_id, user_id } = req.body;
+
+    const queryParams = [map_id, user_id];
+    console.log("queryParams:",queryParams);
+    return db.query(str, queryParams)
+      .then(result => {
+        console.log("maps.results",result.rows[0]);
+        res.json({ map: result.rows[0] });
+      })
+      .catch(err => {
+        console.log("err:", err.message);
+        res.json({ error: err.message });
+      });
+
+  });
   return router;
 };
 

@@ -38,7 +38,8 @@
     JOIN maps ON maps.id = favourite_maps.map_id
     WHERE favourite_maps.user_id = 1;
 
-
+  --Add a favourite to maps.
+    INSERT INTO favourite_maps (user_id, map_id) VALUES ( 1, 1);
 
 -- XXXXXXXXXXXXXXXXXXXXXXXXXXX
 --           MAPS

@@ -1,4 +1,4 @@
-
+  //********* Login Render Functions **********/
   const login = function () {
     let queryObj = {
       id: currentUserId
@@ -29,11 +29,6 @@
       //if there was a failure
       console.error("The user login failed. Error: " + status, error);
     });
-    // Callback handler that will be called regardless
-    // if the request failed or succeeded
-    request.always(function() {
-      //anything here will run - fail or success.
-    });
   };
 
 
@@ -49,4 +44,9 @@
 
     });
   });
+
+  //initial login
+  login();
+
+  // END //
 
