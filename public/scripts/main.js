@@ -6,8 +6,8 @@
 let currentMapId = 1;
 let currentUserId = 1;
 const defaultNewPinImageURL = '../images/map_logo.png';
-const defaultNewPinZoom = 16;
-const focusOnPinZoom = 16;
+const defaultNewPinZoom = 14.5;
+const focusOnPinZoom = 14.5;
 
 
 /****************************/

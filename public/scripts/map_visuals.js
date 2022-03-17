@@ -6,8 +6,8 @@ let marker;
 let mapLayer;
 let updatePin = true;
 
-const mapStartingLat = 49.285395314699244;
-const mapStartingLng = -123.12673661801905;
+const mapStartingLat = 51.50809423316578;
+const mapStartingLng = -0.1278112803825553;
 const mapStartingZoom = 13;
 
 // Place new pin on the map

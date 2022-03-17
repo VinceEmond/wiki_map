@@ -1,6 +1,6 @@
 // Client facing scripts here
 
-const startingMapName = "Vancouver Coffee Shops";
+const startingMapName = "Free Parking in London";
 
 $(document).ready(function() {
   //this escapes the content
