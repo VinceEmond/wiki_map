@@ -1,0 +1,22 @@
+// --------------------------
+// styling for the pin popups
+// --------------------------
+.pin-popup {
+  text-align: center;
+}
+
+.pin-popup img {
+  width: 150px;
+  height: auto;
+  max-height: 200px;
+  border-radius: 5px;
+}
+
+.pin-popup h1 {
+  font-size: 14px;
+  margin-bottom: -5px;
+}
+
+.pin-popup h2 {
+  font-size: 12px;
+}
