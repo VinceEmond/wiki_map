@@ -235,7 +235,6 @@ $newMapPointSubmitBtn.click(function(event) {
       reloadMap();
     })
     .catch(error => console.log(error));
-
 });
 
 

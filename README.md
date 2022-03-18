@@ -41,26 +41,28 @@ This application was created as a midterm project for [Lighthouse Labs'](https:/
 ## Screenshots
 
 
-* Page A
-!["Page A"]()
+* Wiki Map Layout
+!["Wiki Map Layout"]()
 
-* Page B
-!["Page B"]()
-
-* Page C
-!["Page C"]()
+* Wiki Map Pin
+!["Wiki Map Pin"]()
 
 
 ## GIFs
-* GIF A
-![GIF A]()
+* Folder Animations
+![Folder Animations]()
 
-* GIF B
-![GIF B]()
+* Map Pin Focus Animation
+![Map Pin Focus Animation]()
 
-* GIF C
-![GIF C]()
+* Create New Map
+![Create New Map]()
 
+* Add New Pins
+![Add New Pins]()
+
+* Edit Existing Pins
+![Edit Existing Pins]()
 
 # Getting Started
 1. Fork this repository, then clone your fork of this repository.
