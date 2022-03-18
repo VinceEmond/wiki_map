@@ -18,7 +18,7 @@
 
 # About
 
-Wiki Map is a single page map collaboration app. The purpose of this app is to facilitate the creation and hosting of publicly available maps. Once created, each map can continue collecting more data through the submission and collaboration of other registered users. This app proves especially useful for mapping out locations that are typically not searchable in map search engines. Such as: Secret Waterfalls, Mushroom Foraging Zones, or even Nearby Free Parking Spots.
+Wiki Map is a single page map collaboration app. The purpose of this app is to facilitate the creation and hosting of publicly available maps. Once created, each map can continue collecting more data through the submission and collaboration of other registered users. This app proves especially useful for mapping out locations that are typically not searchable in map search engines such as: Secret Waterfalls, Mushroom Foraging Zones, or even Nearby Free Parking Spots.
 
 This application was created as a midterm project for [Lighthouse Labs'](https://www.lighthouselabs.ca/) Web Development Bootcamp by [Vince Emond](https://github.com/VinceEmond), [Kent Gulka](https://github.com/kgulka) and [Ethan Loewen](https://github.com/ethanloewen) with the purpose of practice HTML, CSS, Javascript, jQuery AJAX and PostgreSQL and most importantly to practice the workflow of GIT version control when working as a team on a project.
 
