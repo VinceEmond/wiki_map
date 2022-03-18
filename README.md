@@ -41,28 +41,33 @@ This application was created as a midterm project for [Lighthouse Labs'](https:/
 ## Screenshots
 
 
-* Wiki Map Layout
-!["Wiki Map Layout"]()
+### Wiki Map - Main Layout
+!["Wiki Map - Main Layout"](https://github.com/VinceEmond/wiki_map/blob/main/public/images/Github%20Readme/Wiki_Map_Screenshot_1.png?raw=true)
 
-* Wiki Map Pin
-!["Wiki Map Pin"]()
+### Wiki Map - Edit Pin
+!["Wiki Map - Edit Pin](https://github.com/VinceEmond/wiki_map/blob/main/public/images/Github%20Readme/Wiki_Map_Screenshot_2.png?raw=true)
 
 
 ## GIFs
-* Folder Animations
-![Folder Animations]()
+### Folder Animations
 
-* Map Pin Focus Animation
-![Map Pin Focus Animation]()
+![Folder Animations](https://github.com/VinceEmond/wiki_map/blob/main/public/images/Github%20Readme/Folder_Animations.gif?raw=true)
 
-* Create New Map
-![Create New Map]()
+### Map Pin Focus Animation
 
-* Add New Pins
-![Add New Pins]()
+![Map Pin Focus Animation](https://github.com/VinceEmond/wiki_map/blob/main/public/images/Github%20Readme/Map_Pin_Focus.gif?raw=true)
 
-* Edit Existing Pins
-![Edit Existing Pins]()
+### Create New Map
+
+![Create New Map](https://github.com/VinceEmond/wiki_map/blob/main/public/images/Github%20Readme/Create_New_Map.gif?raw=true)
+
+### Add New Pins
+
+![Add New Pins](https://github.com/VinceEmond/wiki_map/blob/main/public/images/Github%20Readme/Add_New_Pins.gif?raw=true)
+
+### Edit Existing Pins
+
+![Edit Existing Pins](https://github.com/VinceEmond/wiki_map/blob/main/public/images/Github%20Readme/Editing_Pins.gif?raw=true)
 
 # Getting Started
 1. Fork this repository, then clone your fork of this repository.
