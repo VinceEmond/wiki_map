@@ -1,4 +1,4 @@
-<h1 align="center">Wiki Map</h1>
+<h1 align="center">Wiki Map Project</h1>
 
 ## Table Of Contents
 
@@ -65,8 +65,9 @@ This application was created as a midterm project for [Lighthouse Labs'](https:/
 # Getting Started
 1. Fork this repository, then clone your fork of this repository.
 2. Install dependencies using the `npm install` command.
-3. Start the web server using the `npm run local` command.
-4. Visit <http://localhost:8080/> in your browser.
+3. Create the necessary .env file using the .env.example file as a reference
+4. Start the web server using the `npm run local` command.
+5. Visit <http://localhost:8080/> in your browser.
 
 ## Dependencies
 - Node 5.10.x or above
