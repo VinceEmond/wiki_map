@@ -1,6 +1,4 @@
-/*
- * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
- */
+
 
 const express = require('express');
 const router  = express.Router();
@@ -9,7 +7,6 @@ module.exports = (db) => {
   //this will reroute if the cookie hasn't
   //been set (user not logged in).
   router.use((req, res, next) => {
-    console.log("I hit the cookie checker in the maps js");
     if (!req.cookies) {
       res.redirect('/login');
       return;

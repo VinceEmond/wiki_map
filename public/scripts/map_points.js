@@ -1,3 +1,4 @@
+/* MAP_POINTS.JS BY VINCE EMOND */
 
 /****************************/
 /*        VARIABLES         */
@@ -69,7 +70,6 @@ const setUILayout = function(layout) {
 };
 
 const createMapPointElement = function(mapPoint) {
-  // Create and return HTML element for a Single Map Point List Item
   const {name, description, id} = mapPoint;
   const $mapPoint = $(`
     <div class="map_point_element_wrapper">
@@ -83,7 +83,6 @@ const createMapPointElement = function(mapPoint) {
 };
 
 const renderMapPoints = function(mapPointsArr) {
-  // Append every map_point from array to the sidebar list and generate a pin on the map
   for (const mapPoint of mapPointsArr) {
     $mapPointsList.prepend(createMapPointElement(mapPoint));
     generatePin(mapPoint);
@@ -146,7 +145,7 @@ $mapPointsList.click(function(event) {
   const interaction = event.target.id.split('_')[3];
   const mapPointId = event.target.id.split('_')[2];
 
-  // MAP POINT LIST - DELETE button
+  // DELETE BUTTON - MAP POINT LIST
   if (interaction === 'delete') {
     deleteMapPoint(mapPointId)
       .then(() => {
@@ -157,10 +156,9 @@ $mapPointsList.click(function(event) {
       .catch(error => console.log(error));
   }
 
-  // MAP POINT LIST - EDIT button
+  // EDIT BUTTON - MAP POINT LIST
   if (interaction === 'edit') {
     idOfMapPointToUpdate = mapPointId;
-
     getPointById(mapPointId)
       .then(mapPoint => {
         populateUpdateForm(mapPoint);
@@ -169,13 +167,12 @@ $mapPointsList.click(function(event) {
       .catch(error => console.log(error));
   }
 
-  // MAP POINT LIST - TITLE click event
+  // TITLE CLICK - MAP POINT LIST
   if (interaction === 'title') {
     getPointById(mapPointId)
       .then(mapPoint => focusOnPin(mapPoint))
       .catch(error => console.log(error));
   }
-
 });
 
 $updateMapPointCancelBtn.click(function(event) {
@@ -189,9 +186,8 @@ $updateMapPointSubmitBtn.click(function(event) {
   event.preventDefault();
   // console.log("Update button clicked! ID of map point to update:", idOfMapPointToUpdate);
 
-  let updateMapPointUrlInput = $updateMapPointURLInput.val();
-
   // If image URL input box is empty, set a default map pin image
+  let updateMapPointUrlInput = $updateMapPointURLInput.val();
   if (!updateMapPointUrlInput) {
     updateMapPointUrlInput = defaultNewPinImageURL;
   }
@@ -213,11 +209,10 @@ $updateMapPointSubmitBtn.click(function(event) {
 
 $newMapPointSubmitBtn.click(function(event) {
   event.preventDefault();
-
   const userIDFromCookie = document.cookie.split('=')[1];
-  let newMapPointUrlInput = $newMapPointUrlInput.val();
 
   // If image URL input box is empty, set a default map pin image
+  let newMapPointUrlInput = $newMapPointUrlInput.val();
   if (!newMapPointUrlInput) {
     newMapPointUrlInput = defaultNewPinImageURL;
   }
@@ -249,3 +244,6 @@ $newMapPointSubmitBtn.click(function(event) {
 /****************************/
 
 loadMapPoints(currentMapId);
+
+
+/* MAP_POINTS.JS BY VINCE EMOND */

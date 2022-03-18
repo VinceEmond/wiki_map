@@ -151,7 +151,7 @@ $(document).ready(function() {
         mapCoordY: map.getCenter().lng,
         zoom: map.getZoom()
       };
-      console.log("queryObj:", queryObj);
+      // console.log("queryObj:", queryObj);
 
       request = $.ajax({ url: "/maps", method: "POST", data: queryObj});
       // Callback handler that will be called on success

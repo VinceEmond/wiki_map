@@ -1,27 +1,25 @@
+/* MAP_POINTS_ROUTES BY VINCE EMOND */
 
 /****************************/
-/*    map_points ROUTES     */
+/*     MAP POINTS ROUTES    */
 /****************************/
 
 const express = require('express');
 const router  = express.Router();
 
-
-
 module.exports = (db) => {
 
-  // GET map_points   ---   Browse all map points for 1 map
-  router.get("/", (req, res) => {
 
+  // GET:BROWSE - MAP POINTS --- RETREIVE ALL MAP POINTS FOR 1 MAP
+  router.get("/", (req, res) => {
     const {map_id} = req.query;
     const queryParams = [map_id];
-
     const queryStr = `
       SELECT *
       FROM map_points
       WHERE map_id = $1
       AND active IS true;
-      `;
+    `;
 
     db.query(queryStr, queryParams)
       .then(response => {
@@ -35,17 +33,16 @@ module.exports = (db) => {
       });
   });
 
-  // GET map_points/:id   ---   Read details for an existing map_point
-  router.get("/:id", (req, res) => {
 
+  // GET:READ - MAP POINT --- RETRIEVE SPECIFIC MAP POINT BY ID
+  router.get("/:id", (req, res) => {
     const {id} = req.params;
     const queryParams = [id];
-
     const queryStr = `
       SELECT *
       FROM map_points
       WHERE map_points.id = $1
-      `;
+    `;
 
     db.query(queryStr,queryParams)
       .then(response => {
@@ -59,14 +56,14 @@ module.exports = (db) => {
       });
   });
 
-  //POST map_points/:id   ---   Edit details for an existing map_point
+
+  // POST:EDIT - MAP POINT --- EDIT/UPDATE DATA FOR SPECIFIC MAP POINT
   router.post("/:id", (req,res) => {
     const {id} = req.params;
     const {name, description, image} = req.body;
     const queryParams = [name, description, image, id];
-
     const queryStr = `
-    UPDATE map_points
+      UPDATE map_points
       SET name = $1,
       description = $2,
       image = $3
@@ -87,7 +84,7 @@ module.exports = (db) => {
   });
 
 
-  // POST map_points/   ---   Add a new map_point
+  // POST:ADD - MAP POINT --- ADD/CREATE A NEW MAP POINT
   router.post("/", (req,res) => {
     const {
       map_id,
@@ -99,14 +96,12 @@ module.exports = (db) => {
       zoom,
       image
     } = req.body;
-
-    const queryStr = `
-      INSERT INTO map_points (map_id, owner_id, name, coord_x, coord_y, zoom, description, image) VALUES (
-        $1, $2, $3, $4, $5, $6, $7, $8
-      )
-      RETURNING *;`;
-
     const queryParams = [map_id, owner_id, name, coord_x, coord_y, zoom, description, image];
+    const queryStr = `
+      INSERT INTO map_points (map_id, owner_id, name, coord_x, coord_y, zoom, description, image) VALUES
+      ($1, $2, $3, $4, $5, $6, $7, $8)
+      RETURNING *;
+    `;
 
     db.query(queryStr, queryParams)
       .then(response => {
@@ -119,23 +114,20 @@ module.exports = (db) => {
       });
   });
 
-  // POST map_points/:id/delete   ---   Delete an existing map_point
+
+  // POST:DELETE - MAP POINT --- SET EXISTING MAP POINT TO INACTIVE IN DB
   router.post('/:id/delete', (req, res) => {
-
     const map_point_id = req.body.map_point_id;
-
-    const queryStr = `
-    UPDATE map_points
-    SET active = false
-    WHERE map_points.id = $1
-    RETURNING *;
-    `;
-
     const queryParams = [map_point_id];
+    const queryStr = `
+      UPDATE map_points
+      SET active = false
+      WHERE map_points.id = $1
+      RETURNING *;
+    `;
 
     db.query(queryStr, queryParams)
       .then((response) => {
-        // console.log(`Set map_point ID ${map_point_id} "active" property to false`);
         res.json({});
       })
       .catch(err => {
@@ -149,3 +141,4 @@ module.exports = (db) => {
   return router;
 };
 
+/* MAP_POINTS_ROUTES BY VINCE EMOND */
