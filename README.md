@@ -65,7 +65,7 @@ This application was created as a midterm project for [Lighthouse Labs'](https:/
 # Getting Started
 1. Fork this repository, then clone your fork of this repository.
 2. Install dependencies using the `npm install` command.
-3. Create the necessary .env file using the .env.example file as a reference
+3. Create the necessary .env file using the `.env.example` file as a reference
 4. Start the web server using the `npm run local` command.
 5. Visit <http://localhost:8080/> in your browser.
 
@@ -122,15 +122,16 @@ Goals of the project:
   - Contributors - [contributors.js](public/scripts/contributors.js)
 
 ## Ethan Loewen
-- API Integration - [Leaflet Maps](https://leafletjs.com/)
 - Wireframe - [Map_Wiki_Wireframe_v01](planning/Map_Wiki_Wireframe_v01.png)
+- HTML / Front End - [index.ejs](views/index.ejs)
 - SCSS Styling
   - [layout.scss](styles/layout.scss)
   - [main.scss](styles/main.scss)
   - [map.scss](styles/map.scss)
   - [pins.scss](styles/pins.scss)
   - [sidebar.scss](styles/sidebar.scss)
-- HTML / Front End - [index.ejs](views/index.ejs)
+- API Integration - [Leaflet Maps](https://leafletjs.com/)
+- Map Object - [map_visuals.js](public/scripts/map_visuals.js)
 
 
 
