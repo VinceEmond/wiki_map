@@ -81,14 +81,12 @@ This application was created as a midterm project for [Lighthouse Labs'](https:/
 
 # Purpose
 Goals of the project:
-- Starting from scratch
+- Building a website from scratch
+- Independence from instruction
 - Learning how projects are planned
-- Learning to work in groups/teams
 - Having a deadline (building under the gun)
 - Working with a full stack
-- Putting the pieces together
-- Independence from instruction
-- Learning how to git version control as a team
+- Collaborating with teamates (GIT version control)
 - Demo practice
 
 # Credit
