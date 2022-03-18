@@ -1,3 +1,4 @@
+/* 01_USERS_SEEDS.SQL BY VINCE EMOND */
 
 INSERT INTO users (name, email, password) VALUES
   ('Andy Bernard', 'andy420@gmail.com', '23rhgdfDF^$#fss322'),

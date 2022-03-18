@@ -1,3 +1,5 @@
+/* 01_QUERIES.SQL BY VINCE EMOND */
+
 -- XXXXXXXXXXXXXXXXXXXXXXXXXXX
 --       USER SPECIFIC
 -- XXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -38,8 +40,7 @@
     JOIN maps ON maps.id = favourite_maps.map_id
     WHERE favourite_maps.user_id = 1;
 
-  --Add a favourite to maps.
-    INSERT INTO favourite_maps (user_id, map_id) VALUES ( 1, 1);
+
 
 -- XXXXXXXXXXXXXXXXXXXXXXXXXXX
 --           MAPS
@@ -122,19 +123,17 @@
 --      FAVOURITE MAPS
 -- XXXXXXXXXXXXXXXXXXXXXXXXXXX
 
--- GET favourite_maps/
--- GET favourite_maps/:id
+-- GET favourite_maps/   ---   Get all favourites
+    SELECT * FROM favourites_maps
+-- GET favourite_maps/:id (Not needed for MVD)
 -- POST favourite_maps/:id (Not needed for MVD)
 
-
 -- POST favourite_maps/   ---   Add map to favourites
-    INSERT INTO favourite_maps (user_id, map_id) VALUES
-      (1, 2);
+    INSERT INTO favourite_maps (user_id, map_id) VALUES (1, 2);
 
 -- POST favourite_maps/:id/delete   ---   Delete a map from favourites
-    DELETE FROM favorites_maps
-    WHERE user_id = 1
-    AND map_id = 1;
+    DELETE FROM favourites_maps
+    WHERE id = 1;
 
 
 
@@ -167,6 +166,8 @@
     JOIN maps ON maps.id = favourite_maps.map_id
     ORDER BY users.name;
 
+
+/* 01_QUERIES.SQL BY VINCE EMOND */
 
 
 

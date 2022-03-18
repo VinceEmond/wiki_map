@@ -14,7 +14,9 @@
 
 # About
 
-Wiki map is an app that allows users to collaboratively create maps which list multiple "points". For example: "Best Places to Eat Around Town" or "Locations of Movie Scenes". This was a built as a midterm project during the Lighthouse Labs Web Dev Bootcamp to practice HTML, CSS, Javascript, jQuery AJAX and PostgreSQL and most importantly to practice the GIT version control workflow involved team projects.
+Wiki Map is an an app that facilitates the creation of maps containing data points collected from a collaboration of many users. This app really shines when it's used to build maps containing location points that are typially not easily found or searchable on typical map search engines. For example:
+
+For example: "Best Places to Eat Around Town" or "Locations of Movie Scenes". This was a built as a midterm project during the Lighthouse Labs Web Dev Bootcamp to practice HTML, CSS, Javascript, jQuery AJAX and PostgreSQL and most importantly to practice the GIT version control workflow involved team projects.
 
 ## Major Learnings:
 1. Planned and built an ERD, user stories and routes
@@ -24,8 +26,8 @@ Wiki map is an app that allows users to collaboratively create maps which list m
 5.
 
 ## Notable Features
-* 
-*
+* Ability to browse a list of publicly available maps created by others
+* Registered users can create their own maps and contribute pins to other maps
 *
 
 
@@ -88,6 +90,21 @@ Goals of the project:
 - Putting the pieces together
 - Independence from instruction
 - Learning how to git/version control as a team
+
+# Credit
+
+## Collaborated Tasks
+- User Stories
+- ERD Model
+- API Integration
+
+## Kent Gulka
+- Drafted Routes
+- 
+## Vince Emond
+
+## Ethan 
+- API 
 
 
 
